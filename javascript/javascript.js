@@ -25,7 +25,7 @@ function getAverageScore(countryName)
 function getColor(d) {
     return d > 5 ? '#800026' :
            d > 4  ? '#BD0026' :
-           d > 3  ? '#E31A1C' :
+           d > 3  ? '#000000' :
            d > 2  ? '#FC4E2A' :
            '#FD8D3C';
 }
