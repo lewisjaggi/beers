@@ -4,11 +4,12 @@ import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Table,Column,Integer,String,Boolean,Date,Float
+from sqlalchemy import Table,Column,Integer,String,Boolean,Float,Date
 import glob
 import os
 from sqlalchemy import MetaData
 from sqlalchemy.orm import mapper
+import datetime
 
 #SQL Alchemy setup
 
@@ -115,6 +116,7 @@ def create_table(file_name):
     conn=engine.connect()
     #Loop through list of lists, each list in create_bom_table.xls_data is a row
     for row in csv_data:
+        row[2] = datetime.datetime.strptime(row[2], '%Y-%m-%d')
         #Each element in the list is an attribute for the table class
         #Iterating through rows and inserting into table
         ins=table_definition.table_define.insert().values(beer_id=row[1],date=row[2],
