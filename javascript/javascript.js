@@ -60,9 +60,9 @@ function resetHighlight(e) {
 
 function selectCountry(e)
 {
-    let country = e.target.feature.properties.ADMIN;
+    let country = convertIso3ToIso2(e.target.feature.properties.ISO_A3);
     
-    console.log(e.target.feature.properties);
+    console.log(country);
 }
 
 function onEachFeature(feature, layer) {
