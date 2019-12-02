@@ -26,7 +26,7 @@ function getTop10(countryName){
     fetch(url,myInit)
     .then(res => res.json())
     .then(data => {
-        
+        $("#beers").html(data[0].country);
     }).catch(err => {
         console.error('Error: ', err);
     });
