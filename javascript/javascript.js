@@ -1,5 +1,5 @@
 //#region variables
-var mymap = L.map('mapid').setView([46.81, 8.22], 5);
+var mymap = L.map('map').setView([46.81, 8.22], 5);
 var countries;
 var geojson;
 var info = L.control();
@@ -14,18 +14,13 @@ function setAverageForCountries(countries)
     });
 }
 
-function getAverageScore(countryName)
-{
-    return Math.random() * 5;
-}
-
 //#endregion
 
 //#region Map Interaction
 function getColor(d) {
     return d > 5 ? '#800026' :
            d > 4  ? '#BD0026' :
-           d > 3  ? '#000000' :
+           d > 3  ? '#E31A1C' :
            d > 2  ? '#FC4E2A' :
            '#FD8D3C';
 }
@@ -63,11 +58,18 @@ function resetHighlight(e) {
     info.update();
 }
 
+function selectCountry(e)
+{
+    let country = e.target.feature.properties.ADMIN;
+    
+    console.log(e.target.feature.properties);
+}
+
 function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
-        //click: zoomToFeature
+        click: selectCountry,
     });
 }
 //#endregion
