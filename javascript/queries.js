@@ -23,10 +23,12 @@ function getBeersCountry(countryName)
 function getTop10(countryName){
 
     url = `http://127.0.0.1:5000/beers?country=${countryName}`;
-    fetch(url,myInit)
-    .then(res => res.json())
-    .then(data => {
-        
+    
+    return fetch(url,myInit)
+    .then((response) => response.json())
+    .then((responseData) => {
+        console.log(responseData);
+        return responseData;
     }).catch(err => {
         console.error('Error: ', err);
     });

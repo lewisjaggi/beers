@@ -61,8 +61,7 @@ function resetHighlight(e) {
 function selectCountry(e)
 {
     let country = convertIso3ToIso2(e.target.feature.properties.ISO_A3);
-    
-    console.log(country);
+    getTop10(country).then(response => document.getElementById("beers").innerHTML = response);
 }
 
 function onEachFeature(feature, layer) {
