@@ -6,6 +6,6 @@ class beers(Resource):
 
     def get(self):
         data = parser_beers.parse_args()
-        query = f'Select beers.name, AVG(reviews.score) from beers JOIN reviews ON beers.beer_id = reviews.beer_id where  beers.country = ? GROUP BY beers.country'
-        req = query_db(query,args=(data['country'],),one=True)
+        query = 'select * from data_beers where data_beers.country=? limit 10'
+        req = query_db(query,args=(data['country'],))
         return req
