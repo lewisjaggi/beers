@@ -1,7 +1,7 @@
 import sqlite3
 from flask import g
 
-DATABASE = '../../db/beers.sqlite'
+DATABASE = '../../../data/beers.sqlite'
 
 def make_dicts(cursor, row):
     return dict((cursor.description[idx][0], value)
