@@ -203,3 +203,11 @@ fabric.properties
 .idea/**/markdown-navigator/
 
 # End of https://www.gitignore.io/api/flask,pycharmlol
+
+data/beers.csv
+
+data/beers.sqlite
+
+data/breweries.csv
+
+data/reviews.csv

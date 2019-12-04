@@ -61,7 +61,30 @@ function resetHighlight(e) {
 function selectCountry(e)
 {
     let country = convertIso3ToIso2(e.target.feature.properties.ISO_A3);
-    getTop10(country).then(response => document.getElementById("beers").innerHTML = response);
+    getTop10(country).then(beers => {
+        let content = "";
+        beers.forEach(beer => {
+            content += createBeer(beer);  
+          });
+
+        document.getElementById("beers").innerHTML = content;
+    });
+}
+
+function createBeer(beer)
+{
+    const markup = `
+    <div class="beer">
+        <h2>
+            ${beer.name}
+        </h2>
+        <p class="brewery">Brewery : ${beer.brewery}</p>
+        <p class="beerStyle">Style : ${beer.style}</p>
+        <p class="average">Note : ${beer.average.toFixed(2)}</p>
+        <p class="alcohol">Alcohol : ${beer.abv == null ? "Unknown" : parseFloat(beer.abv).toFixed(2) }</p>
+    </div>
+    `;
+    return markup;
 }
 
 function onEachFeature(feature, layer) {
