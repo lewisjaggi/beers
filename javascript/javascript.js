@@ -96,6 +96,26 @@ function onEachFeature(feature, layer) {
 }
 //#endregion
 
+//#region Tools
+var slider = document.getElementById('slider');
+
+noUiSlider.create(slider, {
+    start: [4, 10],
+    connect: true,
+    range: {
+        'min': 0,
+        'max': 100
+    }
+});
+
+var alcoholSliderValueElement = document.getElementById('alcoholRange');
+
+slider.noUiSlider.on('update', function (values) {
+    alcoholSliderValueElement.value = values.join('% - ') + "%";
+});
+
+//#endregion
+
 //#region Map Creation
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',

@@ -1,5 +1,6 @@
+/* Can change */
 #about { width: 1500px; height: 200px; border: 1px solid black; }
-#tools { width: 1500px; height: 50px; border: 1px solid black; }
+#tools { width: 1500px; height: 100px; border: 1px solid black; }
 #map { 
     width: 800px; 
     height: 600px; 
@@ -14,6 +15,8 @@
      width: 1500px; height: 400px; border: 1px solid black;
 }
 
+
+/* Don't change*/
 .info {
     padding: 6px 8px;
     font: 14px/16px Arial, Helvetica, sans-serif;
@@ -37,4 +40,8 @@
     float: left;
     margin-right: 8px;
     opacity: 0.7;
+}
+
+.noUi-connect {
+    background: #d38423;
 }
