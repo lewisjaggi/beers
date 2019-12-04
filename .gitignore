@@ -211,3 +211,5 @@ data/beers.sqlite
 data/breweries.csv
 
 data/reviews.csv
+
+server/beers/
