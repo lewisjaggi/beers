@@ -24,25 +24,37 @@ function createCountry(country) {
     return markup;
 }
 
-var slider = document.getElementById('slider');
+function createSlider() {
+    var slider = document.getElementById('slider');
 
-noUiSlider.create(slider, {
-    start: [0, 80],
-    connect: true,
-    range: {
-        'min': 0,
-        'max': 80
-    },
-    format: wNumb({
-        decimals: 1,
-    })
+    noUiSlider.create(slider, {
+        start: [0, 80],
+        connect: true,
+        range: {
+            'min': 0,
+            'max': 80
+        },
+        format: wNumb({
+            decimals: 1,
+        })
 
 
-});
+    });
 
-var alcoholSliderValueElement = document.getElementById('alcoholRange');
+    var alcoholSliderValueElement = document.getElementById('alcoholRange');
 
-slider.noUiSlider.on('update', function (values) {
-    alcoholSliderValueElement.value = values.join('% - ') + "%";
-});
+    slider.noUiSlider.on('update', function (values) {
+        alcoholSliderValueElement.value = values.join('% - ') + "%";
+
+    });
+
+    slider.noUiSlider.on('change', function (values) {
+        alcoholSliderValueElement.value = values.join('% - ') + "%";
+        createColorVolume(values[0],values[1]);
+    });
+
+
+}
+
+
 

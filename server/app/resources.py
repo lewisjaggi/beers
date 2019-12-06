@@ -12,12 +12,14 @@ class Beers(Resource):
         return req
 
 
-class Minmax(Resource):
+class AverageVolume(Resource):
 
     def get(self):
-        min_max = 'select min(beers.abv) as min ,max(beers.abv) as max from beers'
-        min_max = query_db(min_max, one=True)
-        return min_max
+        data = parser_beers_volume.parse_args()
+        query = f'''select country,avg(score) as average from beers inner join reviews r on beers.beer_id = r.beer_id
+where beers.abv between ? and ? group by beers.country order by average desc'''
+        req = query_db(query,(data['min'],data['max']))
+        return req
 
 
 class Average(Resource):

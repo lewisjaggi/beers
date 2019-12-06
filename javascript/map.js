@@ -1,6 +1,4 @@
-var countries;
 var geojson;
-var country_avg = {};
 
 
 function createMap() {
@@ -27,10 +25,10 @@ function createColor() {
         })
         .then(data => {
             $.getJSON("./data/countries.geojson", function (json) {
-                let countries = json.features;
-                setAverageForCountries(data);
-                countries = setDataMap(countries);
-                geojson = L.geoJson(countries, {style: style, onEachFeature: onEachFeature});
+                let countries_features = json.features;
+                tabCountryAverage = setAverageForCountries(data);
+                setDataMap(countries_features, tabCountryAverage);
+                geojson = L.geoJson(countries_features, {style: style, onEachFeature: onEachFeature});
                 layerGroup.addLayer(geojson);
             });
         })
@@ -39,11 +37,28 @@ function createColor() {
         });
 
 
-
 }
 
 function createColorVolume(min, max) {
+    let url_query = `${url}/volume?min=${min}&max=${max}`;
+    layerGroup.removeLayer(geojson);
+    fetch(url_query)
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            $.getJSON("./data/countries.geojson", function (json) {
+                let countries_features = json.features;
+                tabCountryAverage = setAverageForCountries(data);
+                setDataMap(countries_features, tabCountryAverage);
+                geojson = L.geoJson(countries_features, {style: style, onEachFeature: onEachFeature});
+                layerGroup.addLayer(geojson);
+            });
 
+        })
+        .catch(err => {
+            console.log(err);
+        });
 }
 
 function createInfo() {
@@ -92,51 +107,51 @@ function updateMap(data) {
 
 function setAverageForCountries(data) {
 
+    let country_avg = [];
     for (let i = 0; i < data.length; i++) {
         country_avg[data[i].country] = Math.round(data[i].average * 100) / 100;
     }
 
     updateTopCountries(country_avg);
+    return country_avg;
 }
 
-function updateTopCountries(countries)
-{
+function updateTopCountries(countries) {
     // Create items array
-    var items = Object.keys(countries).map(function(key) {
+    var items = Object.keys(countries).map(function (key) {
         return [key, countries[key]];
     });
-    
+
     // Sort the array based on the second element
-    items.sort(function(first, second) {
+    items.sort(function (first, second) {
         return second[1] - first[1];
     });
     let content = "";
-    for (let i = 0; i < items.length; i++)
-    {
-        content += createCountry({rank : i + 1, name : convertIso2ToName(items[i][0]), average : items[i][1]});
+    for (let i = 0; i < items.length; i++) {
+        content += createCountry({rank: i + 1, name: convertIso2ToName(items[i][0]), average: items[i][1]});
     }
 
     document.getElementById("countries").innerHTML = content;
 }
 
-function setDataMap(countries) {
+function setDataMap(countries, country_avg) {
 
     countries.forEach(element => {
         element.properties.average = country_avg[convertIso3ToIso2(element.properties.ISO_A3)];
 
 
     });
-    return countries;
+
 }
 
 function getColor(d) {
     return d > 5 ? '#800026' :
-            d > 4 ? '#BD0026' :
+        d > 4 ? '#BD0026' :
             d > 3 ? '#E31A1C' :
-            d > 2 ? '#FC4E2A' :
-            d > 1 ? '#FD8D3C' :
-            d > 0 ? '#FEB24C' :
-                'rgba(26,52,0,0.17)';
+                d > 2 ? '#FC4E2A' :
+                    d > 1 ? '#FD8D3C' :
+                        d > 0 ? '#FEB24C' :
+                            'rgba(26,52,0,0.17)';
 }
 
 function style(feature) {

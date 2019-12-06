@@ -17,6 +17,6 @@ def close_connection(exception):
         db.close()
 
 api.add_resource(resources.Beers, '/beers')
-api.add_resource(resources.Minmax,'/minmax')
+api.add_resource(resources.AverageVolume,'/volume')
 
 api.add_resource(resources.Average,'/average')
