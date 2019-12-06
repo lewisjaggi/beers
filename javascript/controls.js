@@ -1,25 +1,29 @@
 function createBeer(beer) {
     const markup = `
     <div class="beer">
-        <h2>
-            ${beer.name}
-        </h2>
-        <p class="brewery">Brewery : ${beer.brewery}</p>
-        <p class="beerStyle">Style : ${beer.style}</p>
-        <p class="average">Note : ${beer.average.toFixed(2)}</p>
-        <p class="alcohol">Alcohol : ${beer.abv == null ? "Unknown" : parseFloat(beer.abv).toFixed(2)}</p>
-    </div>
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">${beer.name}</h5>
+        <small>Brewery : ${beer.brewery}</small>
+        </div>
+        <p class="beerStyle mb-0">Style : ${beer.style}</p>
+        <p class="average mb-0">Note : ${beer.average.toFixed(2)}</p>
+        <p class="alcohol mb-0">Alcohol : ${beer.abv == null ? "Unknown" : parseFloat(beer.abv).toFixed(2) }</p>
+        </a>
+    </div> 
+    </div> 
     `;
     return markup;
 }
 
 function createCountry(country) {
-    const markup = `
-    <div class="country">
-        <span class="rank">${country.rank}</span>
-        <span class="countryName">${country.name}</span>
-        <span class="countryAverage">${country.average}</span>
-    </div>
+    const markup = `   
+      <tr>
+        <td><span class="rank">${country.rank}</span></td>
+        <td><span class="countryName">${country.name}</span></td>
+        <td><span class="countryAverage">${country.average}</span></td>
+      </tr>
     `;
     return markup;
 }
