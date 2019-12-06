@@ -213,3 +213,5 @@ data/breweries.csv
 data/reviews.csv
 
 server/beers/
+
+.idea/
