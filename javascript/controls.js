@@ -13,11 +13,17 @@ function createBeer(beer) {
     return markup;
 }
 
+function createCountry(country) {
+    const markup = `
+    <div class="country">
+        <span class="rank">${country.rank}</span>
+        <span class="countryName">${country.name}</span>
+        <span class="countryAverage">${country.average}</span>
+    </div>
+    `;
+    return markup;
+}
 
-
-//#endregion
-
-//#region Tools
 var slider = document.getElementById('slider');
 
 noUiSlider.create(slider, {
@@ -40,5 +46,3 @@ slider.noUiSlider.on('update', function (values) {
     alcoholSliderValueElement.value = values.join('% - ') + "%";
 });
 
-
-//#endregion

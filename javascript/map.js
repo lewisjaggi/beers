@@ -92,6 +92,27 @@ function setAverageForCountries(data) {
         country_avg[data[i].country] = Math.round(data[i].average * 100) / 100;
     }
 
+    updateTopCountries(country_avg);
+}
+
+function updateTopCountries(countries)
+{
+    // Create items array
+    var items = Object.keys(countries).map(function(key) {
+        return [key, countries[key]];
+    });
+    
+    // Sort the array based on the second element
+    items.sort(function(first, second) {
+        return second[1] - first[1];
+    });
+    let content = "";
+    for (let i = 0; i < items.length; i++)
+    {
+        content += createCountry({rank : i + 1, name : convertIso2ToName(items[i][0]), average : items[i][1]});
+    }
+
+    document.getElementById("countries").innerHTML = content;
 }
 
 function setDataMap(countries) {
@@ -166,9 +187,3 @@ function onEachFeature(feature, layer) {
         click: selectCountry,
     });
 }
-
-//#region Map Creation
-
-//#endregion
-
-//#region Info display
