@@ -16,4 +16,7 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
-api.add_resource(resources.beers, '/beers')
+api.add_resource(resources.Beers, '/beers')
+api.add_resource(resources.Minmax,'/minmax')
+
+api.add_resource(resources.Average,'/average')

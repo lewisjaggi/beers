@@ -1,13 +1,13 @@
 let myInit = {
-    method:'GET',
+    method: 'GET',
     mode: 'cors',
-    cache:'default',
+    cache: 'default',
 };
 
-function getAverageScore(countryName)
-{
+function getAverageScore(countryName) {
     return Math.random() * 5;
 }
+
 /*
 function getBeersCountry(countryName)
 {
@@ -20,16 +20,17 @@ function getBeersCountry(countryName)
     }
 }*/
 
-function getTop10(countryName){
+async function getTop10(countryName) {
 
-    url = `http://127.0.0.1:5000/beers?country=${countryName}`;
+    url_query = `${url}/beers?country=${countryName}`;
 
-    return fetch(url,myInit)
-    .then((response) => response.json())
-    .then((responseData) => {
-            console.log(responseData);
-            return responseData;
-    }).catch(err => {
+    try {
+        const response = await fetch(url_query, myInit);
+        const responseData = await response.json();
+        console.log(responseData);
+        return responseData;
+    } catch (err) {
         console.error('Error: ', err);
-    });
+    }
 }
+
