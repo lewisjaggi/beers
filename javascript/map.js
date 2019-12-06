@@ -101,9 +101,6 @@ function createLegend() {
     legend.addTo(mymap);
 }
 
-function updateMap(data) {
-
-}
 
 function setAverageForCountries(data) {
 
