@@ -42,6 +42,10 @@ function createColor() {
 
 }
 
+function createColorVolume(min, max) {
+
+}
+
 function createInfo() {
     info.onAdd = function (map) {
         this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"

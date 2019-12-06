@@ -21,11 +21,11 @@ function createBeer(beer) {
 var slider = document.getElementById('slider');
 
 noUiSlider.create(slider, {
-    start: [0, 10],
+    start: [0, 80],
     connect: true,
     range: {
         'min': 0,
-        'max': 10
+        'max': 80
     },
     format: wNumb({
         decimals: 1,
