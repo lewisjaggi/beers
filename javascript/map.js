@@ -30,8 +30,8 @@ function createColor() {
                 let countries = json.features;
                 setAverageForCountries(data);
                 countries = setDataMap(countries);
-                geojson = L.geoJson(countries, {style: style, onEachFeature: onEachFeature}).addTo(mymap);
-                
+                geojson = L.geoJson(countries, {style: style, onEachFeature: onEachFeature});
+                layerGroup.addLayer(geojson);
             });
         })
         .catch(err => {
