@@ -7,7 +7,7 @@ class Beers(Resource):
 
     def get(self):
         data = parser_beers.parse_args()
-        query = 'select * from data_beers where data_beers.country=? limit 10'
+        query = 'select * from data_beers2 where data_beers2.country=? limit 10'
         req = query_db(query, args=(data['country'],))
         return req
 
@@ -28,3 +28,11 @@ class Average(Resource):
         query = 'select * from avg_country'
         average = query_db(query)
         return average
+
+class BeerStats(Resource):
+
+    def get(self):
+        data = parser_beer.parse_args()
+        query = f'''select * from data_beers2 where beer_id = ?'''
+        req = query_db(query,(data["beerId"],))
+        return req

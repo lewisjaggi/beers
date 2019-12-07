@@ -188,12 +188,58 @@ function selectCountry(e) {
     let country = convertIso3ToIso2(e.target.feature.properties.ISO_A3);
     getTop10(country).then(beers => {
         let content = "";
+        let ids = [];
         beers.forEach(beer => {
-            content += createBeer(beer);
+            addedBeer = createBeer(beer);
+            content += addedBeer.content;
+            ids.push(addedBeer.id);
         });
-
+        
         document.getElementById("beers").innerHTML = content;
+
+        
+        ids.forEach(id => document.getElementById(id).addEventListener("click", function (){
+            selectBeer(id);
+        }
+        ));
     });
+}
+
+function selectBeer(name)
+{
+    let content = "";
+    getBeerStat(name).then(beerInfo =>
+        {
+            
+            beerInfo = beerInfo[0];
+            content = createBeerStat(beerInfo);
+            document.getElementById("beerStats").innerHTML = content;
+            var ctx = document.getElementById('beerRadar');
+            var myRadarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Look', 'Smell', 'Taste', 'Feel'],
+                    datasets: [{
+                        backgroundColor: "rgba(211,132,35,0.5)",
+                        data: [beerInfo.look, beerInfo.smell, beerInfo.taste, beerInfo.feel]
+                    }]
+                },
+                options : {
+                    scale: {
+                        ticks: {
+                            suggestedMin: 1,
+                            suggestedMax: 5,
+                        }
+                    },
+                    legend: {
+                        display: false,
+                    }
+                }
+                
+            });
+
+            
+        });
 }
 
 function onEachFeature(feature, layer) {

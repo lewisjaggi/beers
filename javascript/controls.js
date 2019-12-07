@@ -1,8 +1,9 @@
 function createBeer(beer) {
+    let id = beer.beer_id;
     const markup = `
     <div class="beer">
-    <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action">
+    <div class="list-group" id="${id}">
+        <a class="list-group-item list-group-item-action pointer">
         <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1">${beer.name}</h5>
         <small>Brewery : ${beer.brewery}</small>
@@ -14,7 +15,7 @@ function createBeer(beer) {
     </div> 
     </div> 
     `;
-    return markup;
+    return { content: markup, id: id};
 }
 
 function createCountry(country) {
@@ -24,6 +25,21 @@ function createCountry(country) {
         <td><span class="countryName">${country.name}</span></td>
         <td><span class="countryAverage">${country.average}</span></td>
       </tr>
+    `;
+    return markup;
+}
+
+function createBeerStat(beerInfo)
+{
+    const markup = `
+    <div id="beerRadarContainer">
+        <canvas id="beerRadar"></canvas>
+        <span class="feelScore">Feel : ${beerInfo.feel  == null ? "Unknown" : parseFloat(beerInfo.feel).toFixed(2)}</span>
+        <span class="lookScore">Look : ${beerInfo.look  == null ? "Unknown" : parseFloat(beerInfo.look).toFixed(2)}</span>
+        <span class="smellScore">Smell : ${beerInfo.smell  == null ? "Unknown" : parseFloat(beerInfo.smell).toFixed(2)}</span>
+        <span class="tasteScore">Taste : ${beerInfo.taste  == null ? "Unknown" : parseFloat(beerInfo.taste).toFixed(2)}</span>
+    </div>
+
     `;
     return markup;
 }

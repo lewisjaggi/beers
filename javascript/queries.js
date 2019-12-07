@@ -22,3 +22,16 @@ async function getTop10(countryName) {
     }
 }
 
+async function getBeerStat(beerId)
+{
+    url_query = `${url}/beerStat?beerId=${beerId}`;
+
+    try {
+        const response = await fetch(url_query, myInit);
+        const responseData = await response.json();
+        return responseData;
+    } catch (err) {
+        console.error('Error: ', err);
+    }
+}
+

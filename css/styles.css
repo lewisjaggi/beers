@@ -1,9 +1,16 @@
 /* Can change */
 #about { width: 100%;}
 #tools { width: 100%; height: 100px; }
-#countries{
-    height: 600px; 
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 600px;
+    overflow: auto;
 }
+.table-wrapper-scroll-y {
+    display: block;
+}
+
 #map { 
     height: 600px; 
 }
@@ -12,6 +19,11 @@
 }
 #beerStats {
      width: 100%; height: 400px; 
+}
+
+.pointer
+{
+    cursor: pointer;
 }
 
 
