@@ -7,7 +7,7 @@ class Beers(Resource):
 
     def get(self):
         data = parser_beers.parse_args()
-        query = 'select * from data_beers2 where data_beers2.country=? limit 10'
+        query = 'select * from data_beers2 where data_beers2.country=? order by average desc limit 10'
         req = query_db(query, args=(data['country'],))
         return req
 

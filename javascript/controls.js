@@ -20,7 +20,7 @@ function createBeer(beer) {
 
 function createCountry(country) {
     const markup = `   
-      <tr>
+      <tr class='table-row' data-country='${country.iso}'>
         <td><span class="rank">${country.rank}</span></td>
         <td><span class="countryName">${country.name}</span></td>
         <td><span class="countryAverage">${country.average}</span></td>
@@ -35,7 +35,7 @@ function createBeerStat(beerInfo)
     <div id="beerRadarContainer" class="col-sm">
         <canvas id="beerRadar"></canvas>
     </div>
-    <div class="col-sm">
+    <div class="col-sm pt-5">
         <canvas id="similarBeersBar"></canvas>
     </div>
 

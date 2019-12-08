@@ -126,10 +126,28 @@ function updateTopCountries(countries) {
     });
     let content = "";
     for (let i = 0; i < items.length; i++) {
-        content += createCountry({rank: i + 1, name: convertIso2ToName(items[i][0]), average: items[i][1]});
+        content += createCountry({rank: i + 1, name: convertIso2ToName(items[i][0]), average: items[i][1], iso:items[i][0]});
     }
 
     document.getElementById("countries").innerHTML = content;
+    
+    
+    $(".table-row").click(function() {      
+        getTop10($(this).data("country")).then(beers => {
+            let content = "";
+            let ids = [];
+            beers.forEach(beer => {
+                addedBeer = createBeer(beer);
+                content += addedBeer.content;
+                ids.push(addedBeer.id);
+            });            
+            document.getElementById("beers").innerHTML = content;
+            ids.forEach(id => document.getElementById(id).addEventListener("click", function (){
+                selectBeer(id);
+            }
+            ));
+        });
+    })
 }
 
 function setDataMap(countries, country_avg) {
@@ -280,11 +298,14 @@ function selectBeer(id)
                 
             });  
 
-            similarBeers.forEach(beer => 
+            /*similarBeers.forEach(beer => 
                 {
                     labelsBar.push(beer.name);
                     dataBar.push(beer.average);
-                });
+                });*/
+
+            var element = document.getElementById('beerRadar');
+            element.scrollIntoView();
         });
 
         
