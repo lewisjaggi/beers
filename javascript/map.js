@@ -39,7 +39,7 @@ function createColor() {
 
 }
 
-function createColorVolume(min, max) {
+function createColorVolume() {
     let url_query = `${url}/volume?min=${min}&max=${max}`;
     layerGroup.removeLayer(geojson);
     fetch(url_query)
@@ -48,6 +48,7 @@ function createColorVolume(min, max) {
         })
         .then(data => {
             $.getJSON("./data/countries.geojson", function (json) {
+                layerGroup.removeLayer(geojson);
                 let countries_features = json.features;
                 tabCountryAverage = setAverageForCountries(data);
                 setDataMap(countries_features, tabCountryAverage);

@@ -11,4 +11,7 @@ var similarBeersTitle = "Average score of this beer among the top 10 beers in th
 var similarBeerColorsBarGraph = "#ffa200";
 var selectedBeerColorInBarGraph = "#ff5100";
 
+var min = 0;
+var max = 80;
+
 

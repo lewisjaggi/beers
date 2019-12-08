@@ -47,11 +47,11 @@ function createSlider() {
     var slider = document.getElementById('slider');
 
     noUiSlider.create(slider, {
-        start: [0, 80],
+        start: [min, max],
         connect: true,
         range: {
-            'min': 0,
-            'max': 80
+            'min': min,
+            'max': max
         },
         format: wNumb({
             decimals: 1,
@@ -69,7 +69,9 @@ function createSlider() {
 
     slider.noUiSlider.on('change', function (values) {
         alcoholSliderValueElement.value = values.join('% - ') + "%";
-        createColorVolume(values[0],values[1]);
+        min = values[0];
+        max = values[1];
+        createColorVolume();
     });
 
 

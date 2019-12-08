@@ -11,7 +11,7 @@ function getAverageScore(countryName) {
 
 async function getTop10(countryName) {
 
-    url_query = `${url}/beers?country=${countryName}`;
+    url_query = `${url}/beers?country=${countryName}&min=${min}&max=${max}`;
 
     try {
         const response = await fetch(url_query, myInit);
@@ -37,7 +37,7 @@ async function getBeerStat(beerId)
 
 async function getSimilarBeers(style)
 {
-    url_query = `${url}/similarBeers?style=${style}`;
+    url_query = `${url}/similarBeers?style=${style}&min=${min}&max=${max}`;
 
     try {
         const response = await fetch(url_query, myInit);
