@@ -78,9 +78,15 @@ function createSlider() {
 
 function createPicker() {
     getBeersStyle().then(style => {
-        console.log("xdxde");
-        tabStyle = style.map(s => s.style);
-        $("#pickerStyle").val('wswsw').selectpicker('render');
+        var select, i, option;
+        select = document.getElementById('pickerStyle');    
+        
+        for ( i = 1; i < style.length; i += 1 ) {
+            option = document.createElement('option');
+            option.value = option.text = style[i].style;
+            select.append( option )            
+        }
+        $('.selectpicker').selectpicker('refresh');
     });
 }
 
