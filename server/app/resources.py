@@ -36,3 +36,11 @@ class BeerStats(Resource):
         query = f'''select * from data_beers2 where beer_id = ?'''
         req = query_db(query,(data["beerId"],))
         return req
+
+class SimilarBeers(Resource):
+
+    def get(self):
+        data = parser_style.parse_args()
+        query = f'''select * from data_beers2 where style = ? order by average desc limit 10'''
+        req = query_db(query,(data["style"],))
+        return req

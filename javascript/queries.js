@@ -35,3 +35,15 @@ async function getBeerStat(beerId)
     }
 }
 
+async function getSimilarBeers(style)
+{
+    url_query = `${url}/similarBeers?style=${style}`;
+
+    try {
+        const response = await fetch(url_query, myInit);
+        const responseData = await response.json();
+        return responseData;
+    } catch (err) {
+        console.error('Error: ', err);
+    }
+}

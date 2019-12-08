@@ -34,10 +34,13 @@ function createBeerStat(beerInfo)
     const markup = `
     <div id="beerRadarContainer">
         <canvas id="beerRadar"></canvas>
-        <span class="feelScore">Feel : ${beerInfo.feel  == null ? "Unknown" : parseFloat(beerInfo.feel).toFixed(2)}</span>
-        <span class="lookScore">Look : ${beerInfo.look  == null ? "Unknown" : parseFloat(beerInfo.look).toFixed(2)}</span>
-        <span class="smellScore">Smell : ${beerInfo.smell  == null ? "Unknown" : parseFloat(beerInfo.smell).toFixed(2)}</span>
-        <span class="tasteScore">Taste : ${beerInfo.taste  == null ? "Unknown" : parseFloat(beerInfo.taste).toFixed(2)}</span>
+        <div id="beerScoreValues">
+            <span class="score">Feel : ${beerInfo.feel  == null ? "Unknown" : parseFloat(beerInfo.feel).toFixed(2)}</span>
+            <span class="score">Look : ${beerInfo.look  == null ? "Unknown" : parseFloat(beerInfo.look).toFixed(2)}</span>
+            <span class="score">Smell : ${beerInfo.smell  == null ? "Unknown" : parseFloat(beerInfo.smell).toFixed(2)}</span>
+            <span class="score">Taste : ${beerInfo.taste  == null ? "Unknown" : parseFloat(beerInfo.taste).toFixed(2)}</span>
+        </div>
+        <canvas id="similarBeersBar"></canvas>
     </div>
 
     `;

@@ -3,3 +3,6 @@ var layerGroup = new L.LayerGroup();
 layerGroup.addTo(mymap);
 var info = L.control();
 var url = 'http://127.0.0.1:5000';
+
+var similarBeerColorsBarGraph = "#ffa200";
+var selectedBeerColorInBarGraph = "#ff5100";

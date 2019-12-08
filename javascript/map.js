@@ -205,12 +205,10 @@ function selectCountry(e) {
     });
 }
 
-function selectBeer(name)
+function selectBeer(id)
 {
     let content = "";
-    getBeerStat(name).then(beerInfo =>
-        {
-            
+    getBeerStat(id).then(beerInfo => {
             beerInfo = beerInfo[0];
             content = createBeerStat(beerInfo);
             document.getElementById("beerStats").innerHTML = content;
@@ -236,10 +234,54 @@ function selectBeer(name)
                     }
                 }
                 
-            });
+            });  
 
-            
+        getSimilarBeers(beerInfo.style).then(similarBeers => {
+
+            similarBeers.push(beerInfo);
+            similarBeers.sort((a, b) => b.average - a.average);
+            var ctx = document.getElementById('similarBeersBar');
+            var barChart = new Chart(ctx, {
+                type: 'horizontalBar',
+                data: {
+                    labels: similarBeers.map(beer => beer.name + ", from " + convertIso2ToName(beer.country) ),
+                    datasets: [{
+                        data: similarBeers.map(beer => beer.average.toFixed(2)),
+                        backgroundColor: similarBeers.map(beer => beer == beerInfo ? selectedBeerColorInBarGraph : similarBeerColorsBarGraph),
+                    }],
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: "Average score of this beer among the top 10 beers in this category"
+                    },
+                    legend: {
+                        display: false,
+                    },
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                suggestedMin: 1,
+                                suggestedMax: 5
+                            }
+                        }]
+                    }
+                }
+                
+            });  
+
+            similarBeers.forEach(beer => 
+                {
+                    labelsBar.push(beer.name);
+                    dataBar.push(beer.average);
+                });
         });
+
+        
+    });
+
+    
+          
 }
 
 function onEachFeature(feature, layer) {
