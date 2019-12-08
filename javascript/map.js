@@ -218,11 +218,16 @@ function selectBeer(id)
                 data: {
                     labels: ['Look', 'Smell', 'Taste', 'Feel'],
                     datasets: [{
-                        backgroundColor: "rgba(211,132,35,0.5)",
-                        data: [beerInfo.look, beerInfo.smell, beerInfo.taste, beerInfo.feel]
+                        data: [beerInfo.look.toFixed(2), beerInfo.smell.toFixed(2), beerInfo.taste.toFixed(2), beerInfo.feel.toFixed(2)],
+                        backgroundColor: radarChartColor,
                     }]
                 },
                 options : {
+                    title: {
+                        display: true,
+                        text: radarChartTitle,
+                        fontSize: 24,
+                    },
                     scale: {
                         ticks: {
                             suggestedMin: 1,
@@ -238,7 +243,10 @@ function selectBeer(id)
 
         getSimilarBeers(beerInfo.style).then(similarBeers => {
 
-            similarBeers.push(beerInfo);
+            const found = similarBeers.some(el => el.name === beerInfo.name);
+            if (!found) 
+                similarBeers.push(beerInfo);
+
             similarBeers.sort((a, b) => b.average - a.average);
             var ctx = document.getElementById('similarBeersBar');
             var barChart = new Chart(ctx, {
@@ -247,13 +255,14 @@ function selectBeer(id)
                     labels: similarBeers.map(beer => beer.name + ", from " + convertIso2ToName(beer.country) ),
                     datasets: [{
                         data: similarBeers.map(beer => beer.average.toFixed(2)),
-                        backgroundColor: similarBeers.map(beer => beer == beerInfo ? selectedBeerColorInBarGraph : similarBeerColorsBarGraph),
+                        backgroundColor: similarBeers.map(beer => beer.name == beerInfo.name ? selectedBeerColorInBarGraph : similarBeerColorsBarGraph),
                     }],
                 },
                 options: {
                     title: {
                         display: true,
-                        text: "Average score of this beer among the top 10 beers in this category"
+                        text: similarBeersTitle,
+                        fontSize: 24,
                     },
                     legend: {
                         display: false,

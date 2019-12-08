@@ -32,14 +32,10 @@ function createCountry(country) {
 function createBeerStat(beerInfo)
 {
     const markup = `
-    <div id="beerRadarContainer">
+    <div id="beerRadarContainer" class="col-sm">
         <canvas id="beerRadar"></canvas>
-        <div id="beerScoreValues">
-            <span class="score">Feel : ${beerInfo.feel  == null ? "Unknown" : parseFloat(beerInfo.feel).toFixed(2)}</span>
-            <span class="score">Look : ${beerInfo.look  == null ? "Unknown" : parseFloat(beerInfo.look).toFixed(2)}</span>
-            <span class="score">Smell : ${beerInfo.smell  == null ? "Unknown" : parseFloat(beerInfo.smell).toFixed(2)}</span>
-            <span class="score">Taste : ${beerInfo.taste  == null ? "Unknown" : parseFloat(beerInfo.taste).toFixed(2)}</span>
-        </div>
+    </div>
+    <div class="col-sm">
         <canvas id="similarBeersBar"></canvas>
     </div>
 

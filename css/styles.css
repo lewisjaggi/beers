@@ -26,6 +26,12 @@
     cursor: pointer;
 }
 
+#beerScoreValues
+{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
 
 /* Don't change*/
 .info {
