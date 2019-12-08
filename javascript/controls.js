@@ -10,12 +10,12 @@ function createBeer(beer) {
         </div>
         <p class="beerStyle mb-0">Style : ${beer.style}</p>
         <p class="average mb-0">Note : ${beer.average.toFixed(2)}</p>
-        <p class="alcohol mb-0">Alcohol : ${beer.abv == null ? "Unknown" : parseFloat(beer.abv).toFixed(2) }</p>
+        <p class="alcohol mb-0">Alcohol : ${beer.abv == null ? "Unknown" : parseFloat(beer.abv).toFixed(2)}</p>
         </a>
     </div> 
     </div> 
     `;
-    return { content: markup, id: id};
+    return {content: markup, id: id};
 }
 
 function createCountry(country) {
@@ -29,8 +29,7 @@ function createCountry(country) {
     return markup;
 }
 
-function createBeerStat(beerInfo)
-{
+function createBeerStat(beerInfo) {
     const markup = `
     <div id="beerRadarContainer" class="col-sm">
         <canvas id="beerRadar"></canvas>
@@ -75,6 +74,14 @@ function createSlider() {
     });
 
 
+}
+
+function createPicker() {
+    getBeersStyle().then(style => {
+        console.log("xdxde");
+        tabStyle = style.map(s => s.style);
+        $("#pickerStyle").val('wswsw').selectpicker('render');
+    });
 }
 
 

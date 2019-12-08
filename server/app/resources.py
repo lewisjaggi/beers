@@ -44,3 +44,10 @@ class SimilarBeers(Resource):
         query = f'''select * from data_beers2 where style = ? order by average desc limit 10'''
         req = query_db(query,(data["style"],))
         return req
+
+class BeerStyle(Resource):
+
+    def get(self):
+        query = f'''select beers.style from beers group by beers.style'''
+        req = query_db(query)
+        return req

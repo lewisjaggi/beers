@@ -11,7 +11,7 @@
           crossorigin=""/>
     <link rel="stylesheet" href="./css/styles.css"/>
     <link href="./css/nouislider.css" rel="stylesheet">
-    
+    <link rel="stylesheet" href="css/bootstrap-select.min.css">
     <title>Document</title>
 </head>
 <body class="">
@@ -71,18 +71,24 @@
             </div>
         </div>
     </div>
+    <div class="row pr-5 pl-5">
+        <div id="style" class="col-12">
+            <select id="pickerStyle" class="selectpicker" multiple data-actions-box="true">
+            </select>
 
+        </div>
+    </div>
     <div class="row pr-5 pl-5 ">
         <div class="overflow-auto col-xl-3 col-lg-4 col-md-5 table-wrapper-scroll-y my-custom-scrollbar">
             <table class="table table-striped">
                 <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Country</th>
-                        <th scope="col">Score</th>
-                    </tr>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Country</th>
+                    <th scope="col">Score</th>
+                </tr>
                 </thead>
-                    <tbody id="countries" class="">
+                <tbody id="countries" class="">
                 </tbody>
             </table>
         </div>
@@ -110,6 +116,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.0"></script>
+<script src="javascript/libs/bootstrap-select.min.js"></script>
 
 <script src="javascript/libs/wNumb.min.js"></script>
 <script src="javascript/libs/nouislider.min.js"></script>
@@ -126,6 +133,7 @@
     $(window).on("load", function () {
         createMap();
         createSlider();
+        createPicker();
     });
 </script>
 </body>
