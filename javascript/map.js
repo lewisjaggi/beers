@@ -85,14 +85,15 @@ function createLegend() {
     legend.onAdd = function (map) {
 
         var div = L.DomUtil.create('div', 'info legend'),
-            grades = [0, 1, 2, 3, 4, 5],
+            grades = [2.0, 3.0, 3.5, 4.0, 4.5],
             labels = [];
 
+        div.innerHTML += '<i style="background:' + getColor(undefined) + '"></i> No data <br> ' 
         // loop through our density intervals and generate a label with a colored square for each interval
         for (var i = 0; i < grades.length; i++) {
             div.innerHTML +=
                 '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+                grades[i].toFixed(1) + (grades[i + 1] ? ' &ndash; ' + grades[i + 1].toFixed(1) + '<br>' : '+');
         }
 
         return div;
@@ -142,13 +143,13 @@ function setDataMap(countries, country_avg) {
 }
 
 function getColor(d) {
-    return d > 5 ? '#800026' :
-        d > 4 ? '#BD0026' :
-            d > 3 ? '#E31A1C' :
-                d > 2 ? '#FC4E2A' :
-                    d > 1 ? '#FD8D3C' :
-                        d > 0 ? '#FEB24C' :
-                            'rgba(26,52,0,0.17)';
+    return  d > 5 ? '#800026' :
+            d > 4.5 ? '#BD0026' :
+            d > 4 ? '#E31A1C' :
+            d > 3.5 ? '#FC4E2A' :
+            d > 3 ? '#FD8D3C' :
+            d > 2 ? '#FEB24C' :
+                'rgba(26,52,0,0.17)';
 }
 
 function style(feature) {
@@ -300,9 +301,3 @@ function onEachFeature(feature, layer) {
         click: selectCountry,
     });
 }
-
-//#region Map Creation
-
-//#endregion
-
-//#region Info display
