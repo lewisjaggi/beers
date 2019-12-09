@@ -238,7 +238,10 @@ function selectBeer(id)
                 data: {
                     labels: ['Look', 'Smell', 'Taste', 'Feel'],
                     datasets: [{
-                        data: [beerInfo.look.toFixed(2), beerInfo.smell.toFixed(2), beerInfo.taste.toFixed(2), beerInfo.feel.toFixed(2)],
+                        data: [beerInfo.look != null ? beerInfo.look.toFixed(2) : undefined, 
+                                beerInfo.smell != null ? beerInfo.smell.toFixed(2) : undefined,
+                                beerInfo.taste != null ? beerInfo.taste.toFixed(2) : undefined,
+                                beerInfo.feel != null ? beerInfo.feel.toFixed(2) : undefined],
                         backgroundColor: radarChartColor,
                     }]
                 },
