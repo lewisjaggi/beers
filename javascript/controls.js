@@ -34,10 +34,12 @@ function createBeerStat(beerInfo) {
     <div id="beerRadarContainer" class="col-sm">
         <canvas id="beerRadar"></canvas>
     </div>
-    <div class="col-sm pt-5">
+    <div class="col-sm">
         <canvas id="similarBeersBar"></canvas>
     </div>
-
+    <div class="col-sm">
+        <canvas id="similarBeersFullBar"></canvas>
+    </div>
     `;
     return markup;
 }

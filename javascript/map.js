@@ -284,7 +284,7 @@ function selectBeer(id)
                 options: {
                     title: {
                         display: true,
-                        text: similarBeersTitle,
+                        text: similarBeersTitle + " (" + beerInfo.style + ")",
                         fontSize: 24,
                     },
                     legend: {
@@ -302,21 +302,59 @@ function selectBeer(id)
                 
             });  
 
-            /*similarBeers.forEach(beer => 
-                {
-                    labelsBar.push(beer.name);
-                    dataBar.push(beer.average);
-                });*/
+            getSimilarBeersFull(beerInfo.style).then(similarBeers => {
+                console.log(similarBeers.length);
+                const found = similarBeers.some(el => el.name === beerInfo.name);
+                if (!found) 
+                    similarBeers.push(beerInfo);
+    
+                similarBeers.sort((a, b) => b.average - a.average);
+                var ctx = document.getElementById('similarBeersFullBar');
+                var barChart = new Chart(ctx, {
+                    type: 'horizontalBar',
+                    data: {
+                        labels: similarBeers.map(beer => Math.ceil(((1 - (similarBeers.indexOf(beer) / similarBeers.length)) * 100) / 5) * 5 + " %"),
+                        datasets: [{
+                            data: similarBeers.map(beer => beer.average.toFixed(2)),
+                            barThickness: getBarThickness(element.length),
+                            backgroundColor: similarBeers.map(beer => beer.name == beerInfo.name ? selectedBeerColorInBarGraphFull : similarBeerColorsBarGraphFull),
+                        }],
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: similarBeersTitleFull + " (" + beerInfo.style + ")",
+                            fontSize: 24,
+                        },
+                        legend: {
+                            display: false,
+                        },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 1,
+                                    suggestedMax: 5
+                                }
+                            }]
+                        }
+                    }
+                    
+                });  
+            });
 
             var element = document.getElementById('beerRadar');
             element.scrollIntoView();
         });
-
-        
     });
+}
 
-    
-          
+function getBarThickness(numberElements)
+{
+    return numberElements > 300 ? 1 :
+           numberElements > 250 ? 1.5 :
+           numberElements > 100 ? 2 :
+           3
+
 }
 
 function onEachFeature(feature, layer) {

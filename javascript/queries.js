@@ -48,6 +48,19 @@ async function getSimilarBeers(style)
     }
 }
 
+async function getSimilarBeersFull(style)
+{
+    url_query = `${url}/similarBeersFull?style=${style}`;
+
+    try {
+        const response = await fetch(url_query, myInit);
+        const responseData = await response.json();
+        return responseData;
+    } catch (err) {
+        console.error('Error: ', err);
+    }
+}
+
 async function getBeersStyle()
 {
     url_query = `${url}/style`;
