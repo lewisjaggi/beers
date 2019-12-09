@@ -17,7 +17,7 @@ def close_connection(exception):
         db.close()
 
 api.add_resource(resources.Beers, '/beers')
-api.add_resource(resources.AverageVolume,'/volume')
+api.add_resource(resources.AverageVolumeStyle,'/volumestyle')
 
 api.add_resource(resources.Average,'/average')
 api.add_resource(resources.BeerStats,'/beerStat')

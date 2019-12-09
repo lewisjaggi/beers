@@ -10,7 +10,7 @@ function createBeer(beer) {
         </div>
         <p class="beerStyle mb-0">Style : ${beer.style}</p>
         <p class="average mb-0">Note : ${beer.average.toFixed(2)}</p>
-        <p class="alcohol mb-0">Alcohol : ${beer.abv == null ? "Unknown" : parseFloat(beer.abv).toFixed(2)}</p>
+        <p class="alcohol mb-0">Alcohol : ${beer.abv == null ? "Unknown" : parseFloat(beer.abv).toFixed(1)}</p>
         </a>
     </div> 
     </div> 
@@ -72,7 +72,7 @@ function createSlider() {
         alcoholSliderValueElement.value = values.join('% - ') + "%";
         min = values[0];
         max = values[1];
-        createColorVolume();
+        createColorVolumeStyle();
     });
 
 
@@ -94,7 +94,8 @@ function createPicker() {
     });
 
     $('.selectpicker').on('change',e =>{
-
+        beerstyle=$('.selectpicker').val();
+        createColorVolumeStyle();
     });
 
 }

@@ -10,11 +10,15 @@ function getAverageScore(countryName) {
 
 
 async function getTop10(countryName) {
-
-    url_query = `${url}/beers?country=${countryName}&min=${min}&max=${max}`;
+    let form = new FormData();
+    form.append("country",countryName);
+    form.append("min", min);
+    form.append("max", max);
+    form.append("style", JSON.stringify(beerstyle));
+    url_query = `${url}/beers`;
 
     try {
-        const response = await fetch(url_query, myInit);
+        const response = await fetch(url_query, {method:'POST',body:form});
         const responseData = await response.json();
         return responseData;
     } catch (err) {

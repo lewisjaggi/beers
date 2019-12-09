@@ -5,6 +5,8 @@ var info = L.control();
 var url = 'http://127.0.0.1:5000';
 beerstyle = [];
 
+var currentCounty;
+
 var radarChartTitle = "Average score of other properties of the beer";
 var radarChartColor = "rgba(211,132,35,0.5)";
 
