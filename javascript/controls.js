@@ -99,6 +99,13 @@ function createPicker() {
     });
 
 }
+function createSearch() {
+    var searchInput = document.getElementById('searchInput');
+    searchInput.onchange = function () {
+        console.log(this.value);
+    };
+}
+
 
 
 

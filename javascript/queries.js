@@ -77,3 +77,16 @@ async function getBeersStyle()
         console.error('Error: ', err);
     }
 }
+
+async function getBeerByName()
+{
+    url_query = `${url}/searchBeer?search=${search}`;
+
+    try {
+        const response = await fetch(url_query, myInit);
+        const responseData = await response.json();
+        return responseData;
+    } catch (err) {
+        console.error('Error: ', err);
+    }
+}

@@ -61,3 +61,12 @@ class BeerStyle(Resource):
         query = f'''select beers.style from beers group by beers.style'''
         req = query_db(query)
         return req
+
+
+class SearchBeers(Resource):
+
+    def get(self):
+        data = parser_style.parse_args()
+        query = f'''select * from data_beers2 where name contains ?'''
+        req = query_db(query,(data["search"],))
+        return req
