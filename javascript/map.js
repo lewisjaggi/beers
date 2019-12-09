@@ -312,11 +312,17 @@ function selectBeer(id)
                     similarBeers.push(beerInfo);
     
                 similarBeers.sort((a, b) => b.average - a.average);
+                let percentageSelectedBeer = 0;
                 var ctx = document.getElementById('similarBeersFullBar');
                 var barChart = new Chart(ctx, {
                     type: 'horizontalBar',
                     data: {
-                        labels: similarBeers.map(beer => Math.ceil(((1 - (similarBeers.indexOf(beer) / similarBeers.length)) * 100) / 5) * 5 + " %"),
+                        labels: similarBeers.map(beer => {
+                            let percentage = (1 - (similarBeers.indexOf(beer) / similarBeers.length)) * 100;
+                            if (beer.name == beerInfo.name)
+                                percentageSelectedBeer = percentage;
+                            return Math.ceil(( percentage / 5) * 5) + " %";
+                        }),
                         datasets: [{
                             data: similarBeers.map(beer => beer.average.toFixed(2)),
                             barThickness: getBarThickness(element.length),
@@ -326,7 +332,7 @@ function selectBeer(id)
                     options: {
                         title: {
                             display: true,
-                            text: similarBeersTitleFull + " (" + beerInfo.style + ")",
+                            text: similarBeersTitleFull + " (" + beerInfo.style + ") : " + percentageSelectedBeer.toFixed(2),
                             fontSize: 24,
                         },
                         legend: {
@@ -339,7 +345,10 @@ function selectBeer(id)
                                     suggestedMax: 5
                                 }
                             }]
-                        }
+                        },
+                        tooltips: {
+                            enabled: false
+                       }
                     }
                     
                 });  
