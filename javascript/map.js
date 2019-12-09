@@ -39,11 +39,15 @@ function createColor() {
 
 }
 
-function createColorVolume() {
-    let url_query = `${url}/volume?min=${min}&max=${max}`;
+function createColorVolumeStyle() {
+    let form = new FormData();
+    form.append("min", min);
+    form.append("max", max);
+    form.append("style", JSON.stringify(beerstyle));
+    let url_query = `${url}/volumestyle`;
     layerGroup.removeLayer(geojson);
     mymap.spin(true,{lines: 13, length: 40});
-    fetch(url_query)
+    fetch(url_query,{method:'POST',body:form})
         .then(response => {
             return response.json()
         })
@@ -56,6 +60,7 @@ function createColorVolume() {
                 setDataMap(countries_features, tabCountryAverage);
                 geojson = L.geoJson(countries_features, {style: style, onEachFeature: onEachFeature});
                 layerGroup.addLayer(geojson);
+                selectCountry(currentCounty);
             });
 
         })
@@ -208,7 +213,8 @@ function resetHighlight(e) {
 }
 
 function selectCountry(e) {
-    let country = convertIso3ToIso2(e.target.feature.properties.ISO_A3);
+    country = convertIso3ToIso2(e.target.feature.properties.ISO_A3);
+    currentCounty = e;
     getTop10(country).then(beers => {
         let content = "";
         let ids = [];

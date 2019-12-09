@@ -1,23 +1,25 @@
 from flask_restful import Resource
 from reqparsers import *
 from db import query_db
+import json
 
 
 class Beers(Resource):
 
-    def get(self):
+    def post(self):
         data = parser_beers.parse_args()
-        query = 'select * from data_beers2 where data_beers2.country=? and abv between ? and ? order by average desc limit 10'
+        styles = ','.join(map(lambda str: f"'{str}'", json.loads(data['style'])))
+        query = f'select * from data_beers2 where data_beers2.country=? and abv between ? and ? and style in ({styles})order by average desc limit 10'
         req = query_db(query, args=(data['country'],data['min'],data['max']))
         return req
 
 
-class AverageVolume(Resource):
+class AverageVolumeStyle(Resource):
 
-    def get(self):
+    def post(self):
         data = parser_beers_volume.parse_args()
-        query = f'''select country,avg(score) as average from beers inner join reviews r on beers.beer_id = r.beer_id
-where beers.abv between ? and ? group by beers.country order by average desc'''
+        styles = ','.join(map(lambda str: f"'{str}'",json.loads(data['style'])))
+        query = f'''select country,average from data_beers2 where abv between ? and ? and style in ({styles}) group by country order by average desc'''
         req = query_db(query,(data['min'],data['max']))
         return req
 
