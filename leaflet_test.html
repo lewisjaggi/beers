@@ -46,23 +46,32 @@
     </div>
 
     <div class="row pr-5 pl-5">
-        <div id="tools" class="col-12">
-            <p>
-                <label for="alcohol">Alcohol range:</label>
-                <input type="text" id="alcoholRange" readonly style="border:0; color:#f6931f; font-weight:bold;">
-            </p>
-            <div id="slider" class="col-12">
+        <div id="tools" >
+            <div class="col-12">
+                <p>
+                    <label class="labels" for="alcohol">Alcohol range:</label>
+                    <input type="text" id="alcoholRange" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                </p>
+                <div id="slider" >
+
+                </div>
 
             </div>
+                     
+                
         </div>
+       
     </div>
-    <div class="row pr-5 pl-5">
-        <div id="style" class="col-12">
-            <label for="pickerStyle">Select Beer style : </label>
-            <select id="pickerStyle" class="selectpicker" multiple data-actions-box="true" data-width="auto" data-live-search="true">
-            </select>
-
-        </div>
+    <div class="row pr-5 pl-5 pb-3">
+            <div id="style" class="col-12">
+                    <label class="labels" for="pickerStyle">Select Beer style : </label><br>
+                    <div class="form-group" >
+                    
+                    <select id="pickerStyle"  style="z-index: 7;" class="selectpicker form-control dropup" data-dropup-auto="false" multiple data-actions-box="true" data-width="100%" data-live-search="true" data-size="10">
+                    </select>
+                    </div>
+        
+            </div> 
     </div>
     <div class="row pr-5 pl-5 ">
         <div class="overflow-auto col-xl-3 col-lg-4 col-md-5 table-wrapper-scroll-y my-custom-scrollbar">
