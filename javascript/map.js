@@ -61,6 +61,7 @@ function createColorVolumeStyle() {
                 geojson = L.geoJson(countries_features, {style: style, onEachFeature: onEachFeature});
                 layerGroup.addLayer(geojson);
                 selectCountry(currentCounty);
+                document.getElementById("beerStats").innerHTML = "";
             });
 
         })
