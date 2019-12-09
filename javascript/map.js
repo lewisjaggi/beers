@@ -40,10 +40,14 @@ function createColor() {
 }
 
 function createColorVolume() {
-    let url_query = `${url}/volume?min=${min}&max=${max}`;
+    let form = new FormData();
+    form.append("min", min);
+    form.append("max", max);
+    form.append("style", JSON.stringify(beerstyle));
+    let url_query = `${url}/volume`;
     layerGroup.removeLayer(geojson);
     mymap.spin(true,{lines: 13, length: 40});
-    fetch(url_query)
+    fetch(url_query,{method:'POST',body:form})
         .then(response => {
             return response.json()
         })
