@@ -42,11 +42,13 @@ function createColor() {
 function createColorVolume() {
     let url_query = `${url}/volume?min=${min}&max=${max}`;
     layerGroup.removeLayer(geojson);
+    mymap.spin(true,{lines: 13, length: 40});
     fetch(url_query)
         .then(response => {
             return response.json()
         })
         .then(data => {
+            mymap.spin(false);
             $.getJSON("./data/countries.geojson", function (json) {
                 layerGroup.removeLayer(geojson);
                 let countries_features = json.features;
@@ -58,6 +60,7 @@ function createColorVolume() {
 
         })
         .catch(err => {
+            mymap.spin(false);
             console.log(err);
         });
 }

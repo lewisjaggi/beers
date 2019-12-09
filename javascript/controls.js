@@ -86,10 +86,13 @@ function createPicker() {
         for ( i = 1; i < style.length; i += 1 ) {
             option = document.createElement('option');
             option.value = option.text = style[i].style;
+            option.selected = true;
             select.append( option )            
         }
         $('.selectpicker').selectpicker('refresh');
+        console.log(select.value)
     });
+    
 }
 
 
