@@ -19,7 +19,7 @@ class AverageVolumeStyle(Resource):
     def post(self):
         data = parser_beers_volume.parse_args()
         styles = ','.join(map(lambda str: f"'{str}'",json.loads(data['style'])))
-        query = f'''select country,avg(average) as average from data_beers2 where abv between ? and ? and style in ({styles}) group by country order by average desc'''
+        query = f'''select country,sum(sumScore)/sum(nbBeer) as average from data_beers2 where abv between ? and ? and style in ({styles}) and country!="undefined" group by country order by average desc'''
         req = query_db(query,(data['min'],data['max']))
         return req
 

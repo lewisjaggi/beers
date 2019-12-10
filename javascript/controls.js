@@ -6,7 +6,7 @@ function createBeer(beer) {
         <a class="list-group-item list-group-item-action pointer">
         <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1">${beer.name}</h5>
-        <small>Brewery : ${beer.brewery}</small>
+        <small>Brewery : ${beer.brewery == null ? 'Unknown': beer.brewery}</small>
         </div>
         <p class="beerStyle mb-0">Style : ${beer.style}</p>
         <p class="average mb-0">Note : ${beer.average.toFixed(2)}</p>
