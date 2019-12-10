@@ -81,24 +81,29 @@ function createSlider() {
 function createPicker() {
     getBeersStyle().then(style => {
         var select, i, option;
-        select = document.getElementById('pickerStyle');    
-        
-        for ( i = 1; i < style.length; i += 1 ) {
+        select = document.getElementById('multipleSelect');
+
+        for (i = 1; i < style.length; i += 1) {
             beerstyle.push(style[i].style);
             option = document.createElement('option');
             option.value = option.text = style[i].style;
             option.selected = true;
-            select.append( option )            
+            select.append(option)
         }
-        $('.selectpicker').selectpicker('refresh');
+        $('[name=duallistbox]').bootstrapDualListbox({
+            nonSelectedListLabel: 'Non-selected Style',
+            selectedListLabel: 'Selected Style',
+            moveOnSelect: false,
+        });
     });
 
-    $('.selectpicker').on('change',e =>{
-        beerstyle=$('.selectpicker').val();
+    $('[name=duallistbox]').on('change', e => {
+        beerstyle = $('[name=duallistbox]').val();
         createColorVolumeStyle();
     });
 
 }
+
 function createSearch() {
     var searchInput = document.getElementById('searchInput');
     searchInput.onchange = function () {

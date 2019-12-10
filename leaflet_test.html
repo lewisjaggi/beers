@@ -13,6 +13,7 @@
     <link href="./css/nouislider.css" rel="stylesheet">
     <link rel="stylesheet" href="css/bootstrap-select.min.css">
     <link rel="stylesheet" href="css/spin.css">
+    <link rel="stylesheet" href="css/bootstrap-duallistbox.min.css">
     <title>Document</title>
 </head>
 <body class="">
@@ -74,7 +75,8 @@
                     <label class="labels" for="pickerStyle">Select Beer style : </label><br>
                     <div class="form-group" >
                     
-                    <select id="pickerStyle"  style="z-index: 7;" class="selectpicker form-control dropup" data-dropup-auto="false" multiple data-actions-box="true" data-width="100%" data-live-search="true" data-size="10">
+                    <select id="multipleSelect" multiple="multiple" size="10" name="duallistbox">
+
                     </select>
                     </div>
         
@@ -118,13 +120,15 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.0"></script>
+
+<script src="javascript/libs/jquery.bootstrap-duallistbox.min.js" ></script>
 <script src="javascript/libs/bootstrap-select.min.js"></script>
 <script src="javascript/libs/spin.js"></script>
 <script src="javascript/libs/leaflet.spin.min.js"></script>
 <script src="javascript/libs/wNumb.min.js"></script>
 <script src="javascript/libs/nouislider.min.js"></script>
-
 <script src="javascript/libs/isoConverter.js"></script>
+
 <script src="./javascript/globals.js"></script>
 <script src="./javascript/map.js"></script>
 <script src="./javascript/queries.js"></script>
