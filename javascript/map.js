@@ -134,8 +134,11 @@ function updateTopCountries(countries) {
     items.sort(function (first, second) {
         return second[1] - first[1];
     });
+    listCurrentCountry = [];
     let content = "";
     for (let i = 0; i < items.length; i++) {
+        listCurrentCountry.push(convertIso2ToName(items[i][0]));
+        listCurrentCountry = listCurrentCountry.filter(e => e !== undefined);
         content += createCountry({
             rank: i + 1,
             name: convertIso2ToName(items[i][0]),
@@ -163,6 +166,8 @@ function updateTopCountries(countries) {
             ));
         });
     })
+
+    updateSearchCountry();
 }
 
 function setDataMap(countries, country_avg) {

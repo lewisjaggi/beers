@@ -46,12 +46,20 @@
         </div>
     </div>
     <div class="row pr-5 pl-5 pb-3">
-        <div class="col-12" >         
-                <label class="labels" for="alcohol">Search a specific beer</label>   
-                <br>  
+        <div class="col-12" >
+                <label class="labels" for="alcohol">Search a specific beer</label>
+                <br>
                 <input type="text" id="searchInput" class="form-control" placeholder="Search..">
         </div>
-       
+
+    </div>
+    <div class="row pr-5 pl-5 pb-3">
+        <div class="col-12" >
+            <label class="labels" for="country">Search a specific country</label>
+            <br>
+            <input type="text" id="searchCountry" class="form-control" placeholder="Country">
+        </div>
+
     </div>
     <div class="row pr-5 pl-5">
         <div id="tools" >
@@ -89,7 +97,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Country</th>
-                    <th scope="col">Score</th>
+                    <th scope="col">Average Score</th>
                 </tr>
                 </thead>
                 <tbody id="countries" class="">
@@ -128,6 +136,7 @@
 <script src="javascript/libs/wNumb.min.js"></script>
 <script src="javascript/libs/nouislider.min.js"></script>
 <script src="javascript/libs/isoConverter.js"></script>
+<script src="javascript/libs/autocomplete.js" ></script>
 
 <script src="./javascript/globals.js"></script>
 <script src="./javascript/map.js"></script>

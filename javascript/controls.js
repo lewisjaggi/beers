@@ -111,6 +111,11 @@ function createSearch() {
     };
 }
 
+function updateSearchCountry(){
+    console.log(listCurrentCountry);
+    autocomplete(document.getElementById("searchCountry"), listCurrentCountry);
+}
+
 
 
 
