@@ -17,6 +17,6 @@ parser_beer.add_argument('beerId', required=True)
 parser_style = reqparse.RequestParser(bundle_errors=True)
 parser_style.add_argument('style', required=True)
 
-parser_search = reqparse.RequestParser(bundle_errors=True)
-parser_search.add_argument('search', required=True)
+parser_search_beer = reqparse.RequestParser(bundle_errors=True)
+parser_search_beer.add_argument('search', required=True)
 

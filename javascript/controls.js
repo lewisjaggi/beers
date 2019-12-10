@@ -31,14 +31,25 @@ function createCountry(country) {
 
 function createBeerStat(beerInfo) {
     const markup = `
-    <div id="beerRadarContainer" class="col-sm">
-        <canvas id="beerRadar"></canvas>
-    </div>
-    <div class="col-sm">
-        <canvas id="similarBeersBar"></canvas>
-    </div>
-    <div class="col-sm">
-        <canvas id="similarBeersFullBar"></canvas>
+    <div class="card col-12" >
+        <div class="card-body">
+            <div class="d-flex w-100 justify-content-between">
+                <h2>${beerInfo.name}</h2>
+                <h4 class="card-subtitle mb-2 text-muted">from ${beerInfo.brewery} ${beerInfo.country == "undifined" ? "" :  "in " + beerInfo.country }</h4>
+            </div>
+            <h4 class="card-subtitle mb-2 text-muted">Note ${parseFloat(beerInfo.average).toFixed(2)}</h4>
+            <h4 class="card-subtitle mb-2 text-muted">Acohol  ${parseFloat(beerInfo.abv).toFixed(1)}</h4>
+            <div id="beerRadarContainer" class="col-sm">
+                <canvas id="beerRadar"></canvas>
+            </div>
+            <div class="col-sm">
+                <canvas id="similarBeersBar"></canvas>
+            </div>
+            <div class="col-sm">
+                <canvas id="similarBeersFullBar"></canvas>
+            </div>
+
+        </div>
     </div>
     `;
     return markup;
@@ -101,8 +112,33 @@ function createPicker() {
 }
 function createSearch() {
     var searchInput = document.getElementById('searchInput');
-    searchInput.onchange = function () {
-        console.log(this.value);
+    searchInput.onkeydown = function () {
+        if(this.value.length > 0)
+        {
+            getBeerByName(this.value).then(beers =>{
+                beersName = [];
+                for ( i = 1; i < beers.length; i += 1 ) {
+                    beersName.push({value: beers[i].beer_id, label:beers[i].name});
+                }                
+            $("#searchInput").autocomplete({
+                source: beersName,
+                select: function(event, ui) {
+                    event.preventDefault();
+                    if(ui.item){
+                        selectBeer(ui.item.value)
+                    }  
+                },       
+                focus: function(event, ui) {
+                    // prevent autocomplete from updating the textbox
+                    event.preventDefault();
+                    // manually update the textbox
+                    $(this).val(ui.item.label);
+                },
+                              
+            });
+        });
+    
+        }
     };
 }
 
