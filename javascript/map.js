@@ -25,7 +25,7 @@ function createColor() {
         })
         .then(data => {
             $.getJSON("./data/countries.geojson", function (json) {
-                let countries_features = json.features;
+                countries_features = json.features;
                 tabCountryAverage = setAverageForCountries(data);
                 setDataMap(countries_features, tabCountryAverage);
                 geojson = L.geoJson(countries_features, {style: style, onEachFeature: onEachFeature});
@@ -46,24 +46,23 @@ function createColorVolumeStyle() {
     form.append("style", JSON.stringify(beerstyle));
     let url_query = `${url}/volumestyle`;
     layerGroup.removeLayer(geojson);
-    mymap.spin(true,{lines: 13, length: 40});
-    fetch(url_query,{method:'POST',body:form})
+    mymap.spin(true, {lines: 13, length: 40});
+    fetch(url_query, {method: 'POST', body: form})
         .then(response => {
             return response.json()
         })
         .then(data => {
             mymap.spin(false);
-            $.getJSON("./data/countries.geojson", function (json) {
-                layerGroup.removeLayer(geojson);
-                let countries_features = json.features;
-                tabCountryAverage = setAverageForCountries(data);
-                setDataMap(countries_features, tabCountryAverage);
-                geojson = L.geoJson(countries_features, {style: style, onEachFeature: onEachFeature});
-                layerGroup.addLayer(geojson);
-                if(currentCounty!= null)
-                    selectCountry(currentCounty);
-                document.getElementById("beerStats").innerHTML = "";
-            });
+
+            layerGroup.removeLayer(geojson);
+            tabCountryAverage = setAverageForCountries(data);
+            setDataMap(countries_features, tabCountryAverage);
+            geojson = L.geoJson(countries_features, {style: style, onEachFeature: onEachFeature});
+            layerGroup.addLayer(geojson);
+            if (currentCounty != null)
+                selectCountry(currentCounty);
+            document.getElementById("beerStats").innerHTML = "";
+
 
         })
         .catch(err => {
@@ -99,7 +98,7 @@ function createLegend() {
             grades = [2.0, 3.0, 3.5, 4.0, 4.5],
             labels = [];
 
-        div.innerHTML += '<i style="background:' + getColor(undefined) + '"></i> No data <br> ' 
+        div.innerHTML += '<i style="background:' + getColor(undefined) + '"></i> No data <br> '
         // loop through our density intervals and generate a label with a colored square for each interval
         for (var i = 0; i < grades.length; i++) {
             div.innerHTML +=
@@ -137,13 +136,18 @@ function updateTopCountries(countries) {
     });
     let content = "";
     for (let i = 0; i < items.length; i++) {
-        content += createCountry({rank: i + 1, name: convertIso2ToName(items[i][0]), average: items[i][1], iso:items[i][0]});
+        content += createCountry({
+            rank: i + 1,
+            name: convertIso2ToName(items[i][0]),
+            average: items[i][1],
+            iso: items[i][0]
+        });
     }
 
     document.getElementById("countries").innerHTML = content;
-    
-    
-    $(".table-row").click(function() {      
+
+
+    $(".table-row").click(function () {
         getTop10($(this).data("country")).then(beers => {
             let content = "";
             let ids = [];
@@ -151,11 +155,11 @@ function updateTopCountries(countries) {
                 addedBeer = createBeer(beer);
                 content += addedBeer.content;
                 ids.push(addedBeer.id);
-            });            
+            });
             document.getElementById("beers").innerHTML = content;
-            ids.forEach(id => document.getElementById(id).addEventListener("click", function (){
-                selectBeer(id);
-            }
+            ids.forEach(id => document.getElementById(id).addEventListener("click", function () {
+                    selectBeer(id);
+                }
             ));
         });
     })
@@ -172,13 +176,13 @@ function setDataMap(countries, country_avg) {
 }
 
 function getColor(d) {
-    return  d > 5 ? '#800026' :
-            d > 4.5 ? '#BD0026' :
+    return d > 5 ? '#800026' :
+        d > 4.5 ? '#BD0026' :
             d > 4 ? '#E31A1C' :
-            d > 3.5 ? '#FC4E2A' :
-            d > 3 ? '#FD8D3C' :
-            d > 2 ? '#FEB24C' :
-                'rgba(26,52,0,0.17)';
+                d > 3.5 ? '#FC4E2A' :
+                    d > 3 ? '#FD8D3C' :
+                        d > 2 ? '#FEB24C' :
+                            'rgba(26,52,0,0.17)';
 }
 
 function style(feature) {
@@ -225,60 +229,59 @@ function selectCountry(e) {
             content += addedBeer.content;
             ids.push(addedBeer.id);
         });
-        
+
         document.getElementById("beers").innerHTML = content;
 
-        
-        ids.forEach(id => document.getElementById(id).addEventListener("click", function (){
-            selectBeer(id);
-        }
+
+        ids.forEach(id => document.getElementById(id).addEventListener("click", function () {
+                selectBeer(id);
+            }
         ));
     });
 }
 
-function selectBeer(id)
-{
+function selectBeer(id) {
     let content = "";
     getBeerStat(id).then(beerInfo => {
-            beerInfo = beerInfo[0];
-            content = createBeerStat(beerInfo);
-            document.getElementById("beerStats").innerHTML = content;
-            var ctx = document.getElementById('beerRadar');
-            var myRadarChart = new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: ['Look', 'Smell', 'Taste', 'Feel'],
-                    datasets: [{
-                        data: [beerInfo.look != null ? beerInfo.look.toFixed(2) : undefined, 
-                                beerInfo.smell != null ? beerInfo.smell.toFixed(2) : undefined,
-                                beerInfo.taste != null ? beerInfo.taste.toFixed(2) : undefined,
-                                beerInfo.feel != null ? beerInfo.feel.toFixed(2) : undefined],
-                        backgroundColor: radarChartColor,
-                    }]
+        beerInfo = beerInfo[0];
+        content = createBeerStat(beerInfo);
+        document.getElementById("beerStats").innerHTML = content;
+        var ctx = document.getElementById('beerRadar');
+        var myRadarChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Look', 'Smell', 'Taste', 'Feel'],
+                datasets: [{
+                    data: [beerInfo.look != null ? beerInfo.look.toFixed(2) : undefined,
+                        beerInfo.smell != null ? beerInfo.smell.toFixed(2) : undefined,
+                        beerInfo.taste != null ? beerInfo.taste.toFixed(2) : undefined,
+                        beerInfo.feel != null ? beerInfo.feel.toFixed(2) : undefined],
+                    backgroundColor: radarChartColor,
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: radarChartTitle,
+                    fontSize: 24,
                 },
-                options : {
-                    title: {
-                        display: true,
-                        text: radarChartTitle,
-                        fontSize: 24,
-                    },
-                    scale: {
-                        ticks: {
-                            suggestedMin: 1,
-                            suggestedMax: 5,
-                        }
-                    },
-                    legend: {
-                        display: false,
+                scale: {
+                    ticks: {
+                        suggestedMin: 1,
+                        suggestedMax: 5,
                     }
+                },
+                legend: {
+                    display: false,
                 }
-                
-            });  
+            }
+
+        });
 
         getSimilarBeers(beerInfo.style).then(similarBeers => {
 
             const found = similarBeers.some(el => el.name === beerInfo.name);
-            if (!found) 
+            if (!found)
                 similarBeers.push(beerInfo);
 
             similarBeers.sort((a, b) => b.average - a.average);
@@ -286,7 +289,7 @@ function selectBeer(id)
             var barChart = new Chart(ctx, {
                 type: 'horizontalBar',
                 data: {
-                    labels: similarBeers.map(beer => beer.name + ", from " + convertIso2ToName(beer.country) ),
+                    labels: similarBeers.map(beer => beer.name + ", from " + convertIso2ToName(beer.country)),
                     datasets: [{
                         data: similarBeers.map(beer => beer.average.toFixed(2)),
                         backgroundColor: similarBeers.map(beer => beer.name == beerInfo.name ? selectedBeerColorInBarGraph : similarBeerColorsBarGraph),
@@ -310,15 +313,15 @@ function selectBeer(id)
                         }]
                     }
                 }
-                
-            });  
+
+            });
 
             getSimilarBeersFull(beerInfo.style).then(similarBeers => {
                 console.log(similarBeers.length);
                 const found = similarBeers.some(el => el.name === beerInfo.name);
-                if (!found) 
+                if (!found)
                     similarBeers.push(beerInfo);
-    
+
                 similarBeers.sort((a, b) => b.average - a.average);
                 let percentageSelectedBeer = 0;
                 var ctx = document.getElementById('similarBeersFullBar');
@@ -329,7 +332,7 @@ function selectBeer(id)
                             let percentage = (1 - (similarBeers.indexOf(beer) / similarBeers.length)) * 100;
                             if (beer.name == beerInfo.name)
                                 percentageSelectedBeer = percentage;
-                            return Math.ceil(( percentage / 5) * 5) + " %";
+                            return Math.ceil((percentage / 5) * 5) + " %";
                         }),
                         datasets: [{
                             data: similarBeers.map(beer => beer.average.toFixed(2)),
@@ -356,10 +359,10 @@ function selectBeer(id)
                         },
                         tooltips: {
                             enabled: false
-                       }
+                        }
                     }
-                    
-                });  
+
+                });
             });
 
             var element = document.getElementById('beerRadar');
@@ -368,12 +371,11 @@ function selectBeer(id)
     });
 }
 
-function getBarThickness(numberElements)
-{
+function getBarThickness(numberElements) {
     return numberElements > 300 ? 1 :
-           numberElements > 250 ? 1.5 :
-           numberElements > 100 ? 2 :
-           3
+        numberElements > 250 ? 1.5 :
+            numberElements > 100 ? 2 :
+                3
 
 }
 
