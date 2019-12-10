@@ -78,7 +78,7 @@ async function getBeersStyle()
     }
 }
 
-async function getBeerByName()
+async function getBeerByName(search)
 {
     url_query = `${url}/searchBeer?search=${search}`;
 

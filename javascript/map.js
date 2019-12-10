@@ -370,7 +370,7 @@ function selectBeer(id) {
                 });
             });
 
-            var element = document.getElementById('beerRadar');
+            var element = document.getElementById('beerStats');
             element.scrollIntoView();
         });
     });

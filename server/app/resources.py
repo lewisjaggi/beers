@@ -63,10 +63,11 @@ class BeerStyle(Resource):
         return req
 
 
-class SearchBeers(Resource):
+class SearchBeer(Resource):
 
     def get(self):
-        data = parser_style.parse_args()
-        query = f'''select * from data_beers2 where name contains ?'''
-        req = query_db(query,(data["search"],))
+        data = parser_search_beer.parse_args()
+        search = "'%" + data["search"]  + "%'"
+        query = f'''select beer_id, name from data_beers2 where data_beers2.name LIKE {search} limit 20'''
+        req = query_db(query)
         return req
