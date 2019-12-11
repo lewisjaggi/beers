@@ -129,7 +129,7 @@ function createSearch() {
                     select: function (event, ui) {
                         event.preventDefault();
                         if (ui.item) {
-                            selectBeer(ui.item.value)
+                            selectBeer(ui.item.value);
                         }
                     },
                     focus: function (event, ui) {
@@ -164,7 +164,7 @@ function createSearchCountry() {
                     select: function (event, ui) {
                         event.preventDefault();
                         if (ui.item) {
-                            //selectBeer(ui.item.value)
+                            console.log(ui.item.value);
                         }
                     },
                     focus: function (event, ui) {
