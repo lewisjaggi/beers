@@ -6,7 +6,7 @@ function createBeer(beer) {
         <a class="list-group-item list-group-item-action pointer">
         <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1">${beer.name}</h5>
-        <small>Brewery : ${beer.brewery == null ? 'Unknown': beer.brewery}</small>
+        <small>Brewery : ${beer.brewery == null ? 'Unknown' : beer.brewery}</small>
         </div>
         <p class="beerStyle mb-0">Style : ${beer.style}</p>
         <p class="average mb-0">Note : ${beer.average.toFixed(2)}</p>
@@ -118,40 +118,68 @@ function createPicker() {
 function createSearch() {
     var searchInput = document.getElementById('searchInput');
     searchInput.onkeydown = function () {
-        if(this.value.length > 0)
-        {
-            getBeerByName(this.value).then(beers =>{
+        if (this.value.length > 0) {
+            getBeerByName(this.value).then(beers => {
                 beersName = [];
-                for ( i = 1; i < beers.length; i += 1 ) {
-                    beersName.push({value: beers[i].beer_id, label:beers[i].name});
-                }                
-            $("#searchInput").autocomplete({
-                source: beersName,
-                select: function(event, ui) {
-                    event.preventDefault();
-                    if(ui.item){
-                        selectBeer(ui.item.value)
-                    }  
-                },       
-                focus: function(event, ui) {
-                    // prevent autocomplete from updating the textbox
-                    event.preventDefault();
-                    // manually update the textbox
-                    $(this).val(ui.item.label);
-                },
-                              
+                for (i = 1; i < beers.length; i += 1) {
+                    beersName.push({value: beers[i].beer_id, label: beers[i].name});
+                }
+                $("#searchInput").autocomplete({
+                    source: beersName,
+                    select: function (event, ui) {
+                        event.preventDefault();
+                        if (ui.item) {
+                            selectBeer(ui.item.value);
+                        }
+                    },
+                    focus: function (event, ui) {
+                        // prevent autocomplete from updating the textbox
+                        event.preventDefault();
+                        // manually update the textbox
+                        $(this).val(ui.item.label);
+                    },
+
+                });
             });
-        });
-    
+
         }
     };
 }
 
-function updateSearchCountry(){
-    console.log(listCurrentCountry);
-    autocomplete(document.getElementById("searchCountry"), listCurrentCountry);
-}
 
+function createSearchCountry() {
+    var searchInput = document.getElementById('searchCountry');
+    searchInput.onkeydown = function () {
+        if (this.value.length > 0) {
+            getBeerByName(this.value).then(beers => {
+                $("#searchCountry").autocomplete({
+                    source: function (req, responseFn) {
+                        var re = $.ui.autocomplete.escapeRegex(req.term);
+                        var matcher = new RegExp("^" + re, "i");
+                        var a = $.grep(listCurrentCountry, function (item, index) {
+                            return matcher.test(item);
+                        });
+                        responseFn(a);
+                    },
+                    select: function (event, ui) {
+                        event.preventDefault();
+                        if (ui.item) {
+                            console.log(ui.item.value);
+                        }
+                    },
+                    focus: function (event, ui) {
+                        // prevent autocomplete from updating the textbox
+                        event.preventDefault();
+                        // manually update the textbox
+                        $(this).val(ui.item.label);
+                    },
+
+                });
+            });
+
+        }
+    };
+}
 
 
 

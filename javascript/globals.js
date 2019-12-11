@@ -5,7 +5,7 @@ var info = L.control();
 var url = 'http://127.0.0.1:5000';
 beerstyle = [];
 
-var currentCounty;
+var currentCountry;
 var countries_features;
 
 var listCurrentCountry = [];
