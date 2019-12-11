@@ -19,7 +19,7 @@ var selectedBeerColorInBarGraph = "#ff5100";
 
 var similarBeersTitleFull = "Average score of this beer among all beers in this category";
 var selectedBeerColorInBarGraphFull = "#ff0000";
-var similarBeerColorsBarGraphFull = "rgba(255,166,0,0.5)";
+var similarBeerColorsBarGraphFull = "rgba(255,132,38,1)";
 
 var min = 0;
 var max = 80;

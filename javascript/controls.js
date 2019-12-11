@@ -35,17 +35,17 @@ function createBeerStat(beerInfo) {
         <div class="card-body">
             <div class="d-flex w-100 justify-content-between">
                 <h2>${beerInfo.name}</h2>
-                <h4 class="card-subtitle mb-2 text-muted">from ${beerInfo.brewery} ${beerInfo.country == "undifined" ? "" : "in " + beerInfo.country}</h4>
+                <h4 class="card-subtitle mb-2 text-muted">from ${beerInfo.brewery == null ? "Unknown brewery" : beerInfo.brewery} ${beerInfo.country == "undifined" ? "" :  "in " + beerInfo.country }</h4>
             </div>
             <h4 class="card-subtitle mb-2 text-muted">Note ${parseFloat(beerInfo.average).toFixed(2)}</h4>
-            <h4 class="card-subtitle mb-2 text-muted">Acohol  ${parseFloat(beerInfo.abv).toFixed(1)}</h4>
-            <div id="beerRadarContainer" class="col-sm">
+            <h4 class="card-subtitle mb-2 text-muted">Alcohol  ${parseFloat(beerInfo.abv).toFixed(1)}</h4>
+            <div id="beerRadarContainer" class="col-sm pt-5">
                 <canvas id="beerRadar"></canvas>
             </div>
-            <div class="col-sm">
+            <div class="col-sm pt-5">
                 <canvas id="similarBeersBar"></canvas>
             </div>
-            <div class="col-sm">
+            <div class="col-sm pt-5">
                 <canvas id="similarBeersFullBar"></canvas>
             </div>
 
