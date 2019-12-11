@@ -20,6 +20,12 @@ for _,row in df.iterrows():
 
 output += "};"
 
+output += "\nvar nameToIso2 = {"
+for _,row in df.iterrows():
+    output += f"\"{row['English short name lower case']}\" : \"{row['Alpha-2 code']}\","
+
+output += "};"
+
 output += """\n
 function convertIso3ToIso2(iso3)
 {
@@ -34,6 +40,11 @@ function convertIso2ToIso3(iso2)
 function convertIso2ToName(iso2)
 {
     return iso2toName[iso2];
+}
+
+function convertNameToIso2(name)
+{
+    return nameToIso2[name];
 }
 """
 
