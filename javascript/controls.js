@@ -164,7 +164,7 @@ function createSearchCountry() {
                     select: function (event, ui) {
                         event.preventDefault();
                         if (ui.item) {
-                            console.log(ui.item.value);
+                            selectCountry(convertNameToIso2(ui.item.value));
                         }
                     },
                     focus: function (event, ui) {
