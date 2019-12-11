@@ -153,9 +153,9 @@ function updateTopCountries(countries) {
     $(".table-row").click(function () {
 
         getTop10($(this).data("country")).then(beers => {
-            let content = "";
-            let ids = [];
             currentCountry = $(this).data("country");
+            let content = `<h3>Top 10 for ${convertIso2ToName(currentCountry)} :</h3>`;
+            let ids = [];
             beers.forEach(beer => {
                 addedBeer = createBeer(beer);
                 content += addedBeer.content;
@@ -225,10 +225,9 @@ function resetHighlight(e) {
 }
 
 function selectCountry(iso2) {
-    country = iso2;
     currentCountry = iso2;
-    getTop10(country).then(beers => {
-        let content = "";
+    getTop10(iso2).then(beers => {
+        let content = `<h3>Top 10 for ${convertIso2ToName(iso2)} :</h3>`;
         let ids = [];
         beers.forEach(beer => {
             addedBeer = createBeer(beer);

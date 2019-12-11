@@ -20,7 +20,7 @@ function createBeer(beer) {
 
 function createCountry(country) {
     const markup = `   
-      <tr class='table-row' data-country='${country.iso}'>
+      <tr class='table-row' data-country='${country.iso}' >
         <td><span class="rank">${country.rank}</span></td>
         <td><span class="countryName">${country.name}</span></td>
         <td><span class="countryAverage">${country.average}</span></td>
@@ -35,7 +35,7 @@ function createBeerStat(beerInfo) {
         <div class="card-body">
             <div class="d-flex w-100 justify-content-between">
                 <h2>${beerInfo.name}</h2>
-                <h4 class="card-subtitle mb-2 text-muted">from ${beerInfo.brewery == null ? "Unknown brewery" : beerInfo.brewery} ${beerInfo.country == "undifined" ? "" :  "in " + beerInfo.country }</h4>
+                <h4 class="card-subtitle mb-2 text-muted">from ${beerInfo.brewery == null ? "Unknown brewery" : beerInfo.brewery} ${beerInfo.country == "undifined" ? "" :  "in " + convertIso2ToName(beerInfo.country) }</h4>
             </div>
             <h4 class="card-subtitle mb-2 text-muted">Note ${parseFloat(beerInfo.average).toFixed(2)}</h4>
             <h4 class="card-subtitle mb-2 text-muted">Alcohol  ${parseFloat(beerInfo.abv).toFixed(1)}</h4>
