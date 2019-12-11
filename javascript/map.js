@@ -271,6 +271,7 @@ function selectBeer(id) {
                     fontSize: 24,
                 },
                 scale: {
+                    pointLabels: { fontSize: 30 },
                     ticks: {
                         suggestedMin: 1,
                         suggestedMax: 5,
@@ -313,7 +314,13 @@ function selectBeer(id) {
                         xAxes: [{
                             ticks: {
                                 suggestedMin: 1,
-                                suggestedMax: 5
+                                suggestedMax: 5,
+                                fontSize: 18
+                            }
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                fontSize: 18
                             }
                         }]
                     }
@@ -322,7 +329,6 @@ function selectBeer(id) {
             });
 
             getSimilarBeersFull(beerInfo.style).then(similarBeers => {
-                console.log(similarBeers.length);
                 const found = similarBeers.some(el => el.name === beerInfo.name);
                 if (!found)
                     similarBeers.push(beerInfo);
@@ -335,14 +341,19 @@ function selectBeer(id) {
                     data: {
                         labels: similarBeers.map(beer => {
                             let percentage = (1 - (similarBeers.indexOf(beer) / similarBeers.length)) * 100;
-                            if (beer.name == beerInfo.name)
+                            if (beer.beer_id == beerInfo.beer_id)
                                 percentageSelectedBeer = percentage;
                             return Math.ceil((percentage / 5) * 5) + " %";
                         }),
                         datasets: [{
-                            data: similarBeers.map(beer => beer.average.toFixed(2)),
-                            barThickness: getBarThickness(element.length),
-                            backgroundColor: similarBeers.map(beer => beer.name == beerInfo.name ? selectedBeerColorInBarGraphFull : similarBeerColorsBarGraphFull),
+                            data: similarBeers.map(beer => beer.beer_id == beerInfo.beer_id ? 0 : beer.average.toFixed(2)),
+                            // barThickness: 1,
+                            backgroundColor: similarBeers.map(beer => beer.beer_id == beerInfo.beer_id ? selectedBeerColorInBarGraphFull : similarBeerColorsBarGraphFull),
+                        },
+                        {
+                            data: similarBeers.map(beer => beer.beer_id == beerInfo.beer_id ? beer.average.toFixed(2) : 0),
+                            barThickness: 5,
+                            backgroundColor: similarBeers.map(beer => beer.beer_id == beerInfo.beer_id ? selectedBeerColorInBarGraphFull : similarBeerColorsBarGraphFull),
                         }],
                     },
                     options: {
@@ -358,7 +369,13 @@ function selectBeer(id) {
                             xAxes: [{
                                 ticks: {
                                     suggestedMin: 1,
-                                    suggestedMax: 5
+                                    suggestedMax: 5,
+                                    fontSize: 15
+                                }
+                            }],
+                            yAxes:[{
+                                ticks:{
+                                    fontSize: 15
                                 }
                             }]
                         },
@@ -377,10 +394,10 @@ function selectBeer(id) {
 }
 
 function getBarThickness(numberElements) {
-    return numberElements > 300 ? 1 :
-        numberElements > 250 ? 1.5 :
-            numberElements > 100 ? 2 :
-                3
+    return 5;
+    // return numberElements > 5000 ? 1 :
+    //     numberElements > 2500 ? 2 :
+    //         numberElements > 1250 ? 3 : 4
 
 }
 
