@@ -24,4 +24,5 @@ var similarBeerColorsBarGraphFull = "rgba(255,132,38,1)";
 var min = 0;
 var max = 80;
 
+var selectedRow;
 

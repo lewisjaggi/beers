@@ -150,7 +150,11 @@ function updateTopCountries(countries) {
     document.getElementById("countries").innerHTML = content;
 
 
-    $(".table-row").click(function () {
+    $(".table-row").click(function () {  
+        if(selectedRow != null)
+            selectedRow.classList.remove("table-primary")     
+        this.classList.add("table-primary");
+        selectedRow = this;
 
         getTop10($(this).data("country")).then(beers => {
             currentCountry = $(this).data("country");
