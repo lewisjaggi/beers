@@ -167,7 +167,6 @@ function updateTopCountries(countries) {
         });
     })
 
-    updateSearchCountry();
 }
 
 function setDataMap(countries, country_avg) {
