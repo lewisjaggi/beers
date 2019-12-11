@@ -59,8 +59,8 @@ function createColorVolumeStyle() {
             setDataMap(countries_features, tabCountryAverage);
             geojson = L.geoJson(countries_features, {style: style, onEachFeature: onEachFeature});
             layerGroup.addLayer(geojson);
-            if (currentCounty != null)
-                selectCountry(currentCounty);
+            if (currentCountry != null)
+                selectCountry(currentCountry);
             document.getElementById("beerStats").innerHTML = "";
 
 
@@ -151,9 +151,11 @@ function updateTopCountries(countries) {
 
 
     $(".table-row").click(function () {
+
         getTop10($(this).data("country")).then(beers => {
             let content = "";
             let ids = [];
+            currentCountry = $(this).data("country");
             beers.forEach(beer => {
                 addedBeer = createBeer(beer);
                 content += addedBeer.content;
@@ -222,9 +224,9 @@ function resetHighlight(e) {
     info.update();
 }
 
-function selectCountry(e) {
-    country = convertIso3ToIso2(e.target.feature.properties.ISO_A3);
-    currentCounty = e;
+function selectCountry(iso2) {
+    country = iso2;
+    currentCountry = iso2;
     getTop10(country).then(beers => {
         let content = "";
         let ids = [];
@@ -404,6 +406,6 @@ function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
-        click: selectCountry,
+        click: e => selectCountry(convertIso3ToIso2(e.target.feature.properties.ISO_A3)),
     });
 }
