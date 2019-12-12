@@ -327,12 +327,22 @@ function selectBeer(id) {
                                 suggestedMin: 1,
                                 suggestedMax: 5,
                                 fontSize: 18
-                            }
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Beer score',
+                                fontSize: 18,
+                              }
                         }],
                         yAxes: [{
                             ticks: {
                                 fontSize: 18
-                            }
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Beer name',
+                                fontSize: 18,
+                              }
                         }]
                     }
                 }
@@ -370,7 +380,7 @@ function selectBeer(id) {
                     options: {
                         title: {
                             display: true,
-                            text: similarBeersTitleFull + " (" + beerInfo.style + ") : " + percentageSelectedBeer.toFixed(2),
+                            text: similarBeersTitleFull + " (" + beerInfo.style + ") : " + percentageSelectedBeer.toFixed(2) + "%",
                             fontSize: 24,
                         },
                         legend: {
@@ -381,13 +391,23 @@ function selectBeer(id) {
                                 ticks: {
                                     suggestedMin: 1,
                                     suggestedMax: 5,
-                                    fontSize: 15
-                                }
+                                    fontSize: 15,
+                                },
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Beer score',
+                                    fontSize: 18,
+                                  }
                             }],
                             yAxes: [{
                                 ticks: {
                                     fontSize: 15
-                                }
+                                },
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Percentage of beer with a worse rank',
+                                    fontSize: 18,
+                                  }
                             }]
                         },
                         tooltips: {
