@@ -23,7 +23,7 @@ Télécharger beers.zip et décompresser le fichier beers.sqlite dans ./data
 2. créer un environnement virtuel Python
 ```
 pip install virutalenv
-virutalenv beers
+virtualenv beers
 ```
 3. Activer l'envrionnement virtuel python
 
