@@ -429,7 +429,7 @@ function highlightTab(focus, remove) {
                 this.classList.add("table-warning");
             }
             if (focus) {
-                this.scrollIntoView();
+                this.scrollIntoView({ behavior: 'smooth'});
             }
             }
 
