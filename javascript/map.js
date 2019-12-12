@@ -150,7 +150,15 @@ function updateTopCountries(countries) {
     document.getElementById("countries").innerHTML = content;
 
 
-    $(".table-row").click(function () {  
+    $(".table-row").click(function () {
+        if(currentCountry != null){
+            $('tr').each(function () {
+                if($(this).data('country') === currentCountry){
+                    this.classList.remove("table-primary");
+                }
+
+            });
+        }
         if(selectedRow != null)
             selectedRow.classList.remove("table-primary")     
         this.classList.add("table-primary");
@@ -229,7 +237,20 @@ function resetHighlight(e) {
 }
 
 function selectCountry(iso2) {
+    $('tr').each(function () {
+        if($(this).data('country') === currentCountry){
+            this.classList.remove("table-primary");
+        }
+
+    });
     currentCountry = iso2;
+    $('tr').each(function () {
+        if($(this).data('country') === currentCountry){
+            this.classList.add("table-primary");
+            this.scrollIntoView();
+        }
+
+    });
     getTop10(iso2).then(beers => {
         let content = `<h3>Top 10 for ${convertIso2ToName(iso2)} :</h3>`;
         let ids = [];
