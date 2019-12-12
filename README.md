@@ -5,7 +5,7 @@ VI Project for MSE
 
 ### pré-requis
 - Python 3.6 minimum
-- git
+- Git
 
 ### Installation
 1. Effectuer un clone du repository 
@@ -19,19 +19,19 @@ https://drive.google.com/file/d/1orRh94BwkrKji9x1KVBuZ3Tpf26Grj6B/view?usp=shari
 Télécharger beers.zip et décompresser le fichier beers.sqlite dans ./data
 
 #### Installation server Flask
-1. se rendre dans ./server
-2. créer un environnement virtuel Python
+1. Se rendre dans ./server
+2. Créer un environnement virtuel Python
 ```
 pip install virutalenv
 virtualenv beers
 ```
 3. Activer l'envrionnement virtuel python
 
-batch windows :
+Batch windows :
 ```
 \beers\Scripts\activate
 ```
-bash :
+Bash :
 ```
 source beers/bin/activate
 ```
@@ -39,15 +39,15 @@ source beers/bin/activate
 ```
 pip install -r requirements.txt
 ```
-4. se rendre dans /app et lancer le serveur
+4. Se rendre dans /app et lancer le serveur
 ```
 cd ./server/app
 flask run
 ```
 
 #### Lancer l'application
-1. lancer la commande suivante à la racine du projet :
+1. Lancer la commande suivante à la racine du projet :
 ```
 python -m http-server [port]
 ```
-2. se rendre à l'adresse : http://127.0.0.1:port/index.html
+2. Se rendre à l'adresse : http://127.0.0.1:port/index.html
