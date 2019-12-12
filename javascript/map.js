@@ -151,17 +151,12 @@ function updateTopCountries(countries) {
 
 
     $(".table-row").click(function () {
-        if(currentCountry != null){
-            $('tr').each(function () {
-                if($(this).data('country') === currentCountry){
-                    this.classList.remove("table-primary");
-                }
-
-            });
+        if (currentCountry != null) {
+            highlightTab(false,true);
         }
-        if(selectedRow != null)
-            selectedRow.classList.remove("table-primary")     
-        this.classList.add("table-primary");
+        if (selectedRow != null)
+            selectedRow.classList.remove("table-warning")
+        this.classList.add("table-warning");
         selectedRow = this;
 
         getTop10($(this).data("country")).then(beers => {
@@ -237,20 +232,11 @@ function resetHighlight(e) {
 }
 
 function selectCountry(iso2) {
-    $('tr').each(function () {
-        if($(this).data('country') === currentCountry){
-            this.classList.remove("table-primary");
-        }
+    highlightTab(false,true);
 
-    });
     currentCountry = iso2;
-    $('tr').each(function () {
-        if($(this).data('country') === currentCountry){
-            this.classList.add("table-primary");
-            this.scrollIntoView();
-        }
+    highlightTab(true,false);
 
-    });
     getTop10(iso2).then(beers => {
         let content = `<h3>Top 10 for ${convertIso2ToName(iso2)} :</h3>`;
         let ids = [];
@@ -296,7 +282,7 @@ function selectBeer(id) {
                     fontSize: 24,
                 },
                 scale: {
-                    pointLabels: { fontSize: 30 },
+                    pointLabels: {fontSize: 30},
                     ticks: {
                         suggestedMin: 1,
                         suggestedMax: 5,
@@ -375,11 +361,11 @@ function selectBeer(id) {
                             // barThickness: 1,
                             backgroundColor: similarBeers.map(beer => beer.beer_id == beerInfo.beer_id ? selectedBeerColorInBarGraphFull : similarBeerColorsBarGraphFull),
                         },
-                        {
-                            data: similarBeers.map(beer => beer.beer_id == beerInfo.beer_id ? beer.average.toFixed(2) : 0),
-                            barThickness: 5,
-                            backgroundColor: similarBeers.map(beer => beer.beer_id == beerInfo.beer_id ? selectedBeerColorInBarGraphFull : similarBeerColorsBarGraphFull),
-                        }],
+                            {
+                                data: similarBeers.map(beer => beer.beer_id == beerInfo.beer_id ? beer.average.toFixed(2) : 0),
+                                barThickness: 5,
+                                backgroundColor: similarBeers.map(beer => beer.beer_id == beerInfo.beer_id ? selectedBeerColorInBarGraphFull : similarBeerColorsBarGraphFull),
+                            }],
                     },
                     options: {
                         title: {
@@ -398,8 +384,8 @@ function selectBeer(id) {
                                     fontSize: 15
                                 }
                             }],
-                            yAxes:[{
-                                ticks:{
+                            yAxes: [{
+                                ticks: {
                                     fontSize: 15
                                 }
                             }]
@@ -433,3 +419,19 @@ function onEachFeature(feature, layer) {
         click: e => selectCountry(convertIso3ToIso2(e.target.feature.properties.ISO_A3)),
     });
 }
+
+function highlightTab(focus, remove) {
+    $('tr').each(function () {
+        if ($(this).data('country') === currentCountry) {
+            if (remove) {
+                this.classList.remove("table-warning");
+            } else {
+                this.classList.add("table-warning");
+            }
+            if (focus) {
+                this.scrollIntoView();
+            }
+            }
+
+        });
+    }

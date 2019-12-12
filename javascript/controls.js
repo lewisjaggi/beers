@@ -35,7 +35,7 @@ function createBeerStat(beerInfo) {
         <div class="card-body">
             <div class="d-flex w-100 justify-content-between">
                 <h2>${beerInfo.name}</h2>
-                <h4 class="card-subtitle mb-2 text-muted">from ${beerInfo.brewery == null ? "Unknown brewery" : beerInfo.brewery} ${beerInfo.country == "undifined" ? "" :  "in " + convertIso2ToName(beerInfo.country) }</h4>
+                <h4 class="card-subtitle mb-2 text-muted">from ${beerInfo.brewery == null ? "Unknown brewery" : beerInfo.brewery} ${beerInfo.country == "undifined" ? "" : "in " + convertIso2ToName(beerInfo.country)}</h4>
             </div>
             <h4 class="card-subtitle mb-2 text-muted">Note ${parseFloat(beerInfo.average).toFixed(2)}</h4>
             <h4 class="card-subtitle mb-2 text-muted">Alcohol  ${parseFloat(beerInfo.abv).toFixed(1)}</h4>
@@ -149,35 +149,32 @@ function createSearch() {
 
 function createSearchCountry() {
     var searchInput = document.getElementById('searchCountry');
-    searchInput.onkeydown = function () {
-        if (this.value.length > 0) {
-            getBeerByName(this.value).then(beers => {
-                $("#searchCountry").autocomplete({
-                    source: function (req, responseFn) {
-                        var re = $.ui.autocomplete.escapeRegex(req.term);
-                        var matcher = new RegExp("^" + re, "i");
-                        var a = $.grep(listCurrentCountry, function (item, index) {
-                            return matcher.test(item);
-                        });
-                        responseFn(a);
-                    },
-                    select: function (event, ui) {
-                        event.preventDefault();
-                        if (ui.item) {
-                            selectCountry(convertNameToIso2(ui.item.value));
-                        }
-                    },
-                    focus: function (event, ui) {
-                        // prevent autocomplete from updating the textbox
-                        event.preventDefault();
-                        // manually update the textbox
-                        $(this).val(ui.item.label);
-                    },
-
+    searchInput.onkeypress = function () {
+        $("#searchCountry").autocomplete({
+            source: function (req, responseFn) {
+                var re = $.ui.autocomplete.escapeRegex(req.term);
+                var matcher = new RegExp("^" + re, "i");
+                var a = $.grep(listCurrentCountry, function (item, index) {
+                    return matcher.test(item);
                 });
-            });
+                responseFn(a);
+            },
+            select: function (event, ui) {
+                event.preventDefault();
+                if (ui.item) {
+                    selectCountry(convertNameToIso2(ui.item.value));
+                }
+            },
+            focus: function (event, ui) {
+                // prevent autocomplete from updating the textbox
+                event.preventDefault();
+                // manually update the textbox
+                $(this).val(ui.item.label);
+            },
 
-        }
+        });
+
+
     };
 }
 
