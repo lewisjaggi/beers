@@ -48,6 +48,6 @@ flask run
 #### Lancer l'application
 1. Lancer la commande suivante à la racine du projet :
 ```
-python -m http-server [port]
+python -m http.server [port]
 ```
 2. Se rendre à l'adresse : http://127.0.0.1:port/index.html
