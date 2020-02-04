@@ -1,5 +1,8 @@
 # beers
 VI Project for MSE
+Disponible ici :
+
+https://lewisjaggi.github.io/
 
 ## Procédure d'installation
 
